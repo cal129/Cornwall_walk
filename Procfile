@@ -1,1 +1,1 @@
-web: gunicorn proj_test.wsgi
+web: gunicorn cornish_walks.wsgi
