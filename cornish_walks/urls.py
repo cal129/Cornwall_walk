@@ -21,5 +21,6 @@ from post_walk import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('summernote/', include('django_summernote.urls')),
+    path('walks/', include('post_walk.urls')),  # Include post_walk URLs
     path('', views.index, name='index'),
 ]

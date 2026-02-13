@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ walk.title }} - Cornwall Walks</title>
+    <style>
+        body { font-family: Arial; margin: 20px; }
+        .details { background: #f5f5f5; padding: 20px; border-radius: 5px; }
+        a { color: #0066cc; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        img { max-width: 100%; height: auto; margin-top: 15px; }
+    </style>
+</head>
+<body>
+    <a href="{% url 'walk_list' %}">← Back to all walks</a>
+    
+    <h1>{{ walk.title }}</h1>
+    
+    {% if walk.photo %}
+        <img src="{{ walk.photo.url }}" alt="{{ walk.title }}">
+    {% endif %}
+    
+    <div class="details">
+        <h2>Walk Details</h2>
+        <p><strong>Location:</strong> {{ walk.location }}</p>
+        <p><strong>Coordinates:</strong> {{ walk.coordinates }}</p>
+        <p><strong>Distance:</strong> {{ walk.distance }} {{ walk.distance_unit }}</p>
+        <p><strong>Duration:</strong> {{ walk.time_hours }}h {{ walk.time_minutes }}m</p>
+        <p><strong>Difficulty:</strong> {{ walk.get_difficulty_display }}</p>
+        <p><strong>Type:</strong> {{ walk.get_type_display }}</p>
+        <p><strong>Author:</strong> {{ walk.user.username }}</p>
+        <p><strong>Approved:</strong> {% if walk.authorised %}Yes{% else %}No{% endif %}</p>
+        <p><strong>Featured:</strong> {% if walk.featured %}Yes{% else %}No{% endif %}</p>
+    </div>
+    
+    <h2>Description</h2>
+    <p>{{ walk.description }}</p>
+</body>
+</html>

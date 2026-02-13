@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cornwall Walks</title>
+    <style>
+        body { font-family: Arial; margin: 20px; }
+        .walk { border: 1px solid #ddd; padding: 15px; margin: 10px 0; border-radius: 5px; }
+        .walk h2 { margin-top: 0; }
+        .walk a { color: #0066cc; text-decoration: none; }
+        .walk a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <h1>Cornwall Walks</h1>
+    
+    {% if walks %}
+        {% for walk in walks %}
+            <div class="walk">
+                <h2>{{ walk.title }}</h2>
+                <p><strong>Location:</strong> {{ walk.location }}</p>
+                <p><strong>Distance:</strong> {{ walk.distance }} {{ walk.distance_unit }}</p>
+                <p><strong>Duration:</strong> {{ walk.time_hours }}h {{ walk.time_minutes }}m</p>
+                <p><strong>Difficulty:</strong> {{ walk.get_difficulty_display }}</p>
+                <p><strong>Type:</strong> {{ walk.get_type_display }}</p>
+                <p>{{ walk.description|truncatewords:20 }}</p>
+                <a href="{% url 'walk_detail' walk.pk %}">View Details</a>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No walks found.</p>
+    {% endif %}
+</body>
+</html>
