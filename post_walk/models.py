@@ -13,7 +13,7 @@ class postwalk(models.Model):
         (1, 'Out and Back'),
         (2, 'One Way'),
     ]
-    
+
     DIFFICULTY_CHOICES = [
         (0, 'Easy'),
         (1, 'Moderate'),
