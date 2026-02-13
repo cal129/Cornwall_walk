@@ -1,0 +1,39 @@
+/* Global reset */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Arial, sans-serif; display: flex; flex-direction: column; min-height: 100vh; background: #f0f2f5; }
+
+/* Header */
+header { background: #0066cc; color: white; padding: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+header h1 { font-size: 28px; }
+nav { margin-top: 10px; }
+nav a { color: white; text-decoration: none; margin-right: 20px; padding: 5px 10px; border-radius: 3px; }
+nav a:hover { background: rgba(255,255,255,0.2); }
+
+/* Main content */
+main { flex: 1; padding: 20px; max-width: 1200px; margin: 0 auto; width: 100%; }
+
+/* Footer */
+footer { background: #333; color: white; padding: 20px; text-align: center; margin-top: 40px; }
+footer a { color: #66b3ff; text-decoration: none; }
+footer a:hover { text-decoration: underline; }
+
+/* Home hero */
+.hero { text-align: center; padding: 40px 0; }
+.hero-title { font-size: 48px; margin-bottom: 20px; }
+.hero-sub { font-size: 20px; color: #666; margin-bottom: 30px; }
+.btn-primary { background: #0066cc; color: white; padding: 15px 30px; text-decoration: none; border-radius: 5px; font-size: 18px; display: inline-block; }
+
+.featured-section { margin-top: 60px; }
+.muted { color: #666; }
+
+/* Walk list */
+.walk { border: 1px solid #ddd; padding: 15px; margin: 10px 0; border-radius: 5px; background: white; }
+.walk h2 { margin-top: 0; color: #0066cc; }
+.walk a { color: #0066cc; text-decoration: none; font-weight: bold; }
+.walk a:hover { text-decoration: underline; }
+
+/* Walk detail */
+.details { background: #f5f5f5; padding: 20px; border-radius: 5px; margin: 20px 0; }
+.back-link { display: inline-block; margin-bottom: 20px; color: #0066cc; text-decoration: none; }
+.back-link:hover { text-decoration: underline; }
+img { max-width: 100%; height: auto; margin-top: 15px; border-radius: 5px; }

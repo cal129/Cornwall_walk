@@ -65,8 +65,6 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'cornish_walks.urls'
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
 
 TEMPLATES = [
     {
@@ -135,8 +133,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
-
+# Serve static files from '/static/' and include the project's
+# collected `staticfiles/` directory so runserver can find your CSS.
+STATIC_URL = '/static/'
+# Avoid including STATIC_ROOT in STATICFILES_DIRS (causes E002).
+# Rely on app `static/` directories for development; leave STATICFILES_DIRS empty.
+STATICFILES_DIRS = []
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 

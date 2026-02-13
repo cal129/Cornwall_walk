@@ -2,14 +2,7 @@
 
 {% block title %}{{ walk.title }} - Cornwall Walks{% endblock %}
 
-{% block extra_css %}
-<style>
-    .details { background: #f5f5f5; padding: 20px; border-radius: 5px; margin: 20px 0; }
-    .back-link { display: inline-block; margin-bottom: 20px; color: #0066cc; text-decoration: none; }
-    .back-link:hover { text-decoration: underline; }
-    img { max-width: 100%; height: auto; margin-top: 15px; border-radius: 5px; }
-</style>
-{% endblock %}
+{% block extra_css %}{% endblock %}
 
 {% block content %}
     <a href="{% url 'walk_list' %}" class="back-link">← Back to all walks</a>

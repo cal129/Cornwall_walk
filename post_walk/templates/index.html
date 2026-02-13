@@ -3,19 +3,18 @@
 {% block title %}Home - Cornwall Walks{% endblock %}
 
 {% block content %}
-    <div style="text-align: center; padding: 40px 0;">
-        <h1 style="font-size: 48px; margin-bottom: 20px;">Welcome to Cornwall Walks</h1>
-        <p style="font-size: 20px; color: #666; margin-bottom: 30px;">
+    <div class="hero">
+        <h1 class="hero-title">Welcome to Cornwall Walks</h1>
+        <p class="hero-sub">
             Discover the most beautiful walking routes in Cornwall
         </p>
-        <a href="{% url 'walk_list' %}" style="background: #0066cc; color: white; padding: 15px 30px; 
-           text-decoration: none; border-radius: 5px; font-size: 18px; display: inline-block;">
+        <a href="{% url 'walk_list' %}" class="btn-primary">
             Browse All Walks
         </a>
     </div>
     
-    <div style="margin-top: 60px;">
+    <div class="featured-section">
         <h2>Featured Walks</h2>
-        <p style="color: #666;">Coming soon...</p>
+        <p class="muted">Coming soon...</p>
     </div>
 {% endblock %}

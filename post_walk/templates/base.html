@@ -1,28 +1,13 @@
 <!DOCTYPE html>
+{% load static %}
 <html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Cornwall Walks{% endblock %}</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: Arial, sans-serif; display: flex; flex-direction: column; min-height: 100vh; }
-        
-        /* Header */
-        header { background: #0066cc; color: white; padding: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        header h1 { font-size: 28px; }
-        nav { margin-top: 10px; }
-        nav a { color: white; text-decoration: none; margin-right: 20px; padding: 5px 10px; border-radius: 3px; }
-        nav a:hover { background: rgba(255,255,255,0.2); }
-        
-        /* Main content */
-        main { flex: 1; padding: 20px; max-width: 1200px; margin: 0 auto; width: 100%; }
-        
-        /* Footer */
-        footer { background: #333; color: white; padding: 20px; text-align: center; margin-top: 40px; }
-        footer a { color: #66b3ff; text-decoration: none; }
-        footer a:hover { text-decoration: underline; }
-    </style>
+
+
+    <link rel="stylesheet" href="{% static 'post_walk/css/style.css' %}">
     {% block extra_css %}{% endblock %}
 </head>
 <body>
