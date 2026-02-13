@@ -17,4 +17,4 @@ def walk_detail(request, pk):
 
 # Home page
 def index(request):
-    return HttpResponse("Hello, world. You're at the post_walk index.")
+    return render(request, 'index.html')
