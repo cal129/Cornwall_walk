@@ -1,38 +1,49 @@
 {% load static %}
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Sand & Trails{% endblock %}</title>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>{% block title %}Sand & Trails{% endblock %}</title>
+        <style>
+            @import url("https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap");
+        </style>
 
-    <link rel="stylesheet" href="{% static 'post_walk/css/style.css' %}">
-    {% block extra_css %}{% endblock %}
-</head>
-<body>
-    <!-- Header -->
-    <header>
-        <div><img class="logo" src="{% static 'post_walk/images/logo.png' %}" alt="Sand & Trails Logo">
-        <h1> Sand & Trails</h1> </div>
-        <nav>
-            <a href="/">Home</a>
-            <a href="{% url 'walk_list' %}">All Walks</a>
-            <a href="/admin">Admin</a>
-        </nav>
-    </header>
-    
-    <!-- Main Content (pages insert their content here) -->
-    <main>
-        {% block content %}
-        {% endblock %}
-    </main>
-    
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2026 Sand & Trails | Discover the beauty of Cornwall</p>
-        <p><a href="#">About</a> | <a href="#">Contact</a> | <a href="#">Privacy</a></p>
-    </footer>
-    
-    {% block extra_js %}{% endblock %}
-</body>
+        <link rel="stylesheet" href="{% static 'post_walk/css/style.css' %}" />
+        {% block extra_css %}{% endblock %}
+    </head>
+    <body>
+        <!-- Header -->
+        <header>
+            <div>
+                <div> 
+                    <img
+                        class="logo"
+                        src="{% static 'post_walk/images/logo.png' %}"
+                        alt="Sand & Trails Logo"
+                    />
+                    <h1>Sand & Trails</h1>
+                </div>
+                <nav>
+                    <a href="/">Home</a>
+                    <a href="{% url 'walk_list' %}">All Walks</a>
+                    <a href="/admin">Admin</a>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Main Content (pages insert their content here) -->
+        <main>{% block content %} {% endblock %}</main>
+
+        <!-- Footer -->
+        <footer>
+            <p>&copy; 2026 Sand & Trails | Discover the beauty of Cornwall</p>
+            <p>
+                <a href="#">About</a> | <a href="#">Contact</a> |
+                <a href="#">Privacy</a>
+            </p>
+        </footer>
+
+        {% block extra_js %}{% endblock %}
+    </body>
 </html>

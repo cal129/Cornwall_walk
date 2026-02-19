@@ -1,3 +1,5 @@
+
+
 /* Global reset */
 * {
     margin: 0;
@@ -8,14 +10,46 @@
 /* header styles */
 header {
     background-color: rgb(255, 255, 255);
-    padding: 20px;
+    padding: 5px;
+    padding-left: 50px;
     border-bottom: 2px solid #232323;
 }
 
-.logo {
-    width: 60px;
-    height: auto;
+header h1 {
+    font-size: 24px;font-family:fraunces ;
+    color: #191a19;
 }
+
+header > div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+header div div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+nav {
+    display: flex;
+    gap: 15px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #232323;
+}
+
+.logo {
+    width: 80px;
+    height: auto;
+    
+}
+
+/*main page styles */
 
 #main-home {
     background: linear-gradient(135deg, #badae9, #ebecdb, #a7d5bb);
@@ -34,6 +68,14 @@ body {
     background: #f0f2f5;
 }
 
+.accent-word {
+    color: #ff6347; /* Accent color for the word "beautifully" */
+}
+
+h1 {
+    margin: 0;
+}
+
 main {
     flex: 1;
 }
@@ -44,5 +86,4 @@ footer {
     background-color: rgb(181, 211, 213);
 }
 
-/* Header */
 
