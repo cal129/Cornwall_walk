@@ -138,7 +138,9 @@ USE_TZ = True
 STATIC_URL = '/static/'
 # Avoid including STATIC_ROOT in STATICFILES_DIRS (causes E002).
 # Rely on app `static/` directories for development; leave STATICFILES_DIRS empty.
-STATICFILES_DIRS = []
+STATICFILES_DIRS = [
+    BASE_DIR / 'post_walk' / 'static',
+]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

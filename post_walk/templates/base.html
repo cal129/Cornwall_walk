@@ -1,11 +1,10 @@
-<!DOCTYPE html>
 {% load static %}
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Cornwall Walks{% endblock %}</title>
-
+    <title>{% block title %}Sand & Trails{% endblock %}</title>
 
     <link rel="stylesheet" href="{% static 'post_walk/css/style.css' %}">
     {% block extra_css %}{% endblock %}
@@ -13,7 +12,8 @@
 <body>
     <!-- Header -->
     <header>
-        <h1>🥾 Cornwall Walks</h1>
+        <div><img class="logo" src="{% static 'post_walk/images/logo.png' %}" alt="Sand & Trails Logo">
+        <h1> Sand & Trails</h1> </div>
         <nav>
             <a href="/">Home</a>
             <a href="{% url 'walk_list' %}">All Walks</a>
@@ -29,7 +29,7 @@
     
     <!-- Footer -->
     <footer>
-        <p>&copy; 2026 Cornwall Walks | Discover the beauty of Cornwall</p>
+        <p>&copy; 2026 Sand & Trails | Discover the beauty of Cornwall</p>
         <p><a href="#">About</a> | <a href="#">Contact</a> | <a href="#">Privacy</a></p>
     </footer>
     
