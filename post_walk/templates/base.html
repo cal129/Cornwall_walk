@@ -1,4 +1,8 @@
 {% load static %}
+{% url 'account_login' as login_url %}
+{% url 'account_signup' as signup_url %}
+{% url 'account_logout' as logout_url %}
+
 <!doctype html>
 <html>
     <head>
@@ -16,7 +20,7 @@
         <!-- Header -->
         <header>
             <div>
-                <div> 
+                <div>
                     <img
                         class="logo"
                         src="{% static 'post_walk/images/logo.png' %}"
@@ -28,6 +32,33 @@
                     <a href="/">Home</a>
                     <a href="{% url 'walk_list' %}">All Walks</a>
                     <a href="/admin">Admin</a>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a
+                            class="nav-link {% if request.path == logout_url %}active{% endif %}"
+                            aria-current="page"
+                            href="{% url 'account_logout' %}"
+                            >Logout</a
+                        >
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a
+                            class="nav-link {% if request.path == signup_url %}active{% endif %}"
+                            aria-current="page"
+                            href="{% url 'account_signup' %}"
+                            >Register</a
+                        >
+                    </li>
+                    <li class="nav-item">
+                        <a
+                            class="nav-link {% if request.path == login_url %}active{% endif %}"
+                            aria-current="page"
+                            href="{% url 'account_login' %}"
+                            >Login</a
+                        >
+                    </li>
+                    {% endif %}
                 </nav>
             </div>
         </header>
