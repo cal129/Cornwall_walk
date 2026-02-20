@@ -2,30 +2,148 @@
 
 {% block title %}{{ walk.title }} - Cornwall Walks{% endblock %}
 
-{% block extra_css %}{% endblock %}
+{% block extra_css %}
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+        crossorigin=""
+    />
+    <style>
+        #walk-map {
+            height: 320px;
+        }
+    </style>
+{% endblock %}
 
 {% block content %}
-    <a href="{% url 'walk_list' %}" class="back-link">← Back to all walks</a>
-    
-    <h1>{{ walk.title }}</h1>
-    
-    {% if walk.photo %}
-        <img src="{{ walk.photo.url }}" alt="{{ walk.title }}">
-    {% endif %}
-    
-    <div class="details">
-        <h2>Walk Details</h2>
-        <p><strong>Location:</strong> {{ walk.location }}</p>
-        <p><strong>Coordinates:</strong> {{ walk.coordinates }}</p>
-        <p><strong>Distance:</strong> {{ walk.distance }} {{ walk.distance_unit }}</p>
-        <p><strong>Duration:</strong> {{ walk.time_hours }}h {{ walk.time_minutes }}m</p>
-        <p><strong>Difficulty:</strong> {{ walk.get_difficulty_display }}</p>
-        <p><strong>Type:</strong> {{ walk.get_type_display }}</p>
-        <p><strong>Author:</strong> {{ walk.user.username }}</p>
-        <p><strong>Approved:</strong> {% if walk.authorised %}Yes{% else %}No{% endif %}</p>
-        <p><strong>Featured:</strong> {% if walk.featured %}Yes{% else %}No{% endif %}</p>
+    <div class="container py-4">
+        <a href="{% url 'walk_list' %}" class="btn btn-outline-secondary mb-3">&larr; Back to all walks</a>
+
+        <div class="row g-4">
+            <div class="col-12 col-lg-7">
+                <div class="card shadow-sm">
+                    {% if walk.photo %}
+                        <img class="card-img-top" src="{{ walk.photo.url }}" alt="{{ walk.title }}">
+                    {% endif %}
+                    <div class="card-body">
+                        <h1 class="card-title h3 mb-3">{{ walk.title }}</h1>
+                        <div class="d-flex flex-wrap gap-2 mb-3">
+                            <span class="badge bg-success">{{ walk.get_difficulty_display }}</span>
+                            <span class="badge bg-info text-dark">{{ walk.get_type_display }}</span>
+                            {% if walk.featured %}
+                                <span class="badge bg-warning text-dark">Featured</span>
+                            {% endif %}
+                            {% if walk.authorised %}
+                                <span class="badge bg-primary">Approved</span>
+                            {% endif %}
+                        </div>
+                        <h2 class="h5">Description</h2>
+                        <div class="card-text">{{ walk.description|safe }}</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-lg-5">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h2 class="h5 mb-3">Walk Details</h2>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item d-flex justify-content-between">
+                                <span class="text-muted">Location</span>
+                                <span class="fw-semibold">{{ walk.location }}</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between">
+                                <span class="text-muted">Coordinates</span>
+                                <span class="fw-semibold">{{ walk.coordinates }}</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between">
+                                <span class="text-muted">Distance</span>
+                                <span class="fw-semibold">{{ walk.distance }} {{ walk.distance_unit }}</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between">
+                                <span class="text-muted">Duration</span>
+                                <span class="fw-semibold">{{ walk.time_hours }}h {{ walk.time_minutes }}m</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between">
+                                <span class="text-muted">Difficulty</span>
+                                <span class="fw-semibold">{{ walk.get_difficulty_display }}</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between">
+                                <span class="text-muted">Type</span>
+                                <span class="fw-semibold">{{ walk.get_type_display }}</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between">
+                                <span class="text-muted">Author</span>
+                                <span class="fw-semibold">{{ walk.user.username }}</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card shadow-sm mt-4">
+            <div class="card-body">
+                <h2 class="h5 mb-3">Map</h2>
+                <div id="walk-map" data-coordinates="{{ walk.coordinates }}"></div>
+            </div>
+        </div>
     </div>
-    
-    <h2>Description</h2>
-    <p>{{ walk.description }}</p>
+{% endblock %}
+
+{% block extra_js %}
+    <script
+        src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+        crossorigin=""
+    ></script>
+    <script>
+        (function () {
+            const mapEl = document.getElementById("walk-map");
+            if (!mapEl) {
+                return;
+            }
+
+            const raw = mapEl.dataset.coordinates || "";
+            const matches = raw.match(/([+-]?\d+(?:\.\d+)?)[^\dA-Za-z]*([NSEW])?/gi) || [];
+
+            let lat = null;
+            let lng = null;
+
+            if (matches.length >= 2) {
+                const parsePart = (part) => {
+                    const valueMatch = part.match(/([+-]?\d+(?:\.\d+)?)/);
+                    const dirMatch = part.match(/[NSEW]/i);
+                    if (!valueMatch) {
+                        return null;
+                    }
+                    let value = parseFloat(valueMatch[1]);
+                    if (dirMatch) {
+                        const dir = dirMatch[0].toUpperCase();
+                        if (dir === "S" || dir === "W") {
+                            value *= -1;
+                        }
+                    }
+                    return value;
+                };
+
+                lat = parsePart(matches[0]);
+                lng = parsePart(matches[1]);
+            }
+
+            if (lat === null || lng === null || Number.isNaN(lat) || Number.isNaN(lng)) {
+                mapEl.innerHTML = "<p class=\"text-muted\">Map coordinates unavailable.</p>";
+                return;
+            }
+
+            const map = L.map(mapEl).setView([lat, lng], 13);
+            L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+                maxZoom: 19,
+                attribution: "&copy; OpenStreetMap contributors",
+            }).addTo(map);
+
+            L.marker([lat, lng]).addTo(map);
+        })();
+    </script>
 {% endblock %}

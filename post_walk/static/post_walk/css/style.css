@@ -67,9 +67,18 @@ body {
     min-height: 100vh;
     background: #f0f2f5;
 }
-
+.hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: 36px;
+    color: #333;
+    padding-left: 50px;
+    text-align: left;
+}
 .accent-word {
-    color: #ff6347; /* Accent color for the word "beautifully" */
+    background: linear-gradient(to right, #559ac5, #d9c171);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
 }
 
 h1 {

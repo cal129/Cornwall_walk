@@ -5,22 +5,40 @@
 {% block extra_css %}{% endblock %}
 
 {% block content %}
-    <h1>All Walks</h1>
-    
-    {% if walks %}
-        {% for walk in walks %}
-            <div class="walk">
-                <h2>{{ walk.title }}</h2>
-                <p><strong>Location:</strong> {{ walk.location }}</p>
-                <p><strong>Distance:</strong> {{ walk.distance }} {{ walk.distance_unit }}</p>
-                <p><strong>Duration:</strong> {{ walk.time_hours }}h {{ walk.time_minutes }}m</p>
-                <p><strong>Difficulty:</strong> {{ walk.get_difficulty_display }}</p>
-                <p><strong>Type:</strong> {{ walk.get_type_display }}</p>
-                <p>{{ walk.description|truncatewords:20 }}</p>
-                <a href="{% url 'walk_detail' walk.pk %}">View Details →</a>
+    <div class="container py-3">
+        <h1 class="mb-4">All Walks</h1>
+
+        {% if walks %}
+            <div class="row g-4">
+                {% for walk in walks %}
+                    <div class="col-12 col-md-4">
+                        <div class="card h-100">
+                            {% if walk.photo %}
+                                <img class="card-img-top" src="{{ walk.photo.url }}" alt="{{ walk.title }}">
+                            {% endif %}
+                            <div class="card-body d-flex flex-column">
+                                <h2 class="card-title h5">{{ walk.title }}</h2>
+                                <div class="d-flex flex-wrap gap-2 mb-2">
+                                    <span class="badge bg-success">{{ walk.get_difficulty_display }}</span>
+                                    <span class="badge bg-info text-dark">{{ walk.get_type_display }}</span>
+                                    {% if walk.featured %}
+                                        <span class="badge bg-warning text-dark">Featured</span>
+                                    {% endif %}
+                                </div>
+                                <ul class="list-unstyled small text-muted mb-3">
+                                    <li><span class="fw-semibold">Location:</span> {{ walk.location }}</li>
+                                    <li><span class="fw-semibold">Distance:</span> {{ walk.distance }} {{ walk.distance_unit }}</li>
+                                    <li><span class="fw-semibold">Duration:</span> {{ walk.time_hours }}h {{ walk.time_minutes }}m</li>
+                                </ul>
+                                <p class="card-text">{{ walk.description|striptags|truncatewords_html:20 }}</p>
+                                <a class="btn btn-primary mt-auto" href="{% url 'walk_detail' walk.pk %}">View details</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
             </div>
-        {% endfor %}
-    {% else %}
-        <p>No walks found.</p>
-    {% endif %}
+        {% else %}
+            <p>No walks found.</p>
+        {% endif %}
+    </div>
 {% endblock %}
