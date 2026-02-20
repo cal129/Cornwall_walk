@@ -9,10 +9,16 @@
 
 /* header styles */
 header {
-    background-color: rgb(255, 255, 255);
+    background-color: rgba(255, 255, 255, 0.9);
     padding: 5px;
     padding-left: 50px;
-    border-bottom: 2px solid #232323;
+    border-bottom: 1.2px solid #727272;
+    box-shadow: #333 0px 1px 5px;
+    position: sticky;
+    top: 0;
+    z-index: 1030;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
 }
 
 header h1 {
@@ -52,8 +58,8 @@ nav a {
 /*main page styles */
 
 #main-home {
-    background: linear-gradient(135deg, #badae9, #ebecdb, #a7d5bb);
-    height: 400px;
+    background: linear-gradient(135deg, #ebf8fe, #f2ead9, #f1f9f4);
+    height: 100%;
 }
 
 html,
@@ -92,7 +98,7 @@ main {
 /* Ensure footer is pushed to the bottom in the column flex layout */
 footer {
     margin-top: auto;
-    background-color: rgb(181, 211, 213);
+    background-color: rgb(247, 254, 255);
 }
 
 

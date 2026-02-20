@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 from .models import postwalk
 
 
@@ -17,4 +16,5 @@ def walk_detail(request, pk):
 
 # Home page
 def index(request):
-    return render(request, 'index.html')
+    featured_walks = postwalk.objects.filter(featured=True).order_by('-date_added')[:3]
+    return render(request, 'index.html', {'featured_walks': featured_walks})
