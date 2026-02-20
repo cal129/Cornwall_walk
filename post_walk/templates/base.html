@@ -26,14 +26,16 @@
         <!-- Header -->
         <header>
             <div>
-                <div>
-                    <img
-                        class="logo"
-                        src="{% static 'post_walk/images/logo.png' %}"
-                        alt="Sand & Trails Logo"
-                    />
-                    <h1>Sand & Trails</h1>
-                </div>
+                <a href="/" style="text-decoration: none; color: inherit;">
+                    <div>
+                        <img
+                            class="logo"
+                            src="{% static 'post_walk/images/logo.png' %}"
+                            alt="Sand & Trails Logo"
+                        />
+                        <h1>Sand & Trails</h1>
+                    </div>
+                </a>
                 <nav>
                     <a href="/">Home</a>
                     <a href="{% url 'walk_list' %}">All Walks</a>
@@ -73,12 +75,23 @@
         <main>{% block content %} {% endblock %}</main>
 
         <!-- Footer -->
-        <footer>
-            <p>&copy; 2026 Sand & Trails | Discover the beauty of Cornwall</p>
-            <p>
-                <a href="#">About</a> | <a href="#">Contact</a> |
-                <a href="#">Privacy</a>
-            </p>
+        <footer class="bg-dark text-light py-4 mt-auto">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                        <h5 class="mb-2">Sand & Trails</h5>
+                        <p class="mb-0 text-muted">Discover the beauty of Cornwall</p>
+                    </div>
+                    <div class="col-md-6 text-center text-md-end">
+                        <div class="mb-2">
+                            <a href="#" class="text-light text-decoration-none me-3">About</a>
+                            <a href="#" class="text-light text-decoration-none me-3">Contact</a>
+                            <a href="#" class="text-light text-decoration-none">Privacy</a>
+                        </div>
+                        <p class="mb-0 text-muted small">&copy; 2026 Sand & Trails</p>
+                    </div>
+                </div>
+            </div>
         </footer>
 
         {% block extra_js %}{% endblock %}

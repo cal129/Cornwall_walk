@@ -1,3 +1,4 @@
+from django.db.models import Sum
 from django.shortcuts import render
 from .models import postwalk
 
@@ -9,12 +10,18 @@ def walk_list(request):
 
 
 # Show one walk's details
-def walk_detail(request, pk):
-    walk = postwalk.objects.get(pk=pk)  # Get walk by ID
+def walk_detail(request, slug):
+    walk = postwalk.objects.get(slug=slug)  # Get walk by slug
     return render(request, 'walks/walk_detail.html', {'walk': walk})
 
 
 # Home page
 def index(request):
     featured_walks = postwalk.objects.filter(featured=True).order_by('-date_added')[:3]
-    return render(request, 'index.html', {'featured_walks': featured_walks})
+    walk_count = postwalk.objects.count()  # Counts total walks
+    total_distance = postwalk.objects.aggregate(Sum('distance'))['distance__sum'] or 0  # Sums all distances
+    return render(request, 'index.html', {
+        'featured_walks': featured_walks,
+        'walk_count': walk_count,
+        'total_distance': total_distance
+    })

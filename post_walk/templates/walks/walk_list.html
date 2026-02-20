@@ -31,7 +31,7 @@
                                     <li><span class="fw-semibold">Duration:</span> {{ walk.time_hours }}h {{ walk.time_minutes }}m</li>
                                 </ul>
                                 <p class="card-text">{{ walk.description|striptags|truncatewords_html:20 }}</p>
-                                <a class="btn btn-primary mt-auto" href="{% url 'walk_detail' walk.pk %}">View details</a>
+                                <a class="btn btn-primary mt-auto" href="{% url 'walk_detail' walk.slug %}">View details</a>
                             </div>
                         </div>
                     </div>

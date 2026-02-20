@@ -9,7 +9,7 @@
 
 /* header styles */
 header {
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(255, 255, 255, 0.5);
     padding: 5px;
     padding-left: 50px;
     border-bottom: 1.2px solid #727272;
@@ -62,12 +62,18 @@ nav a {
     height: 100%;
 }
 
+h2, h3 {
+    font-family: 'Fraunces', serif;
+}
+
+
 html,
 body {
     height: 100%;
+    font-family: 'jakarta', sans-serif;
 }
 body {
-    font-family: Arial, sans-serif;
+    font-family: jakarta, sans-serif;
     display: flex;
     flex-direction: column;
     min-height: 100vh;

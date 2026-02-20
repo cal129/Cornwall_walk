@@ -4,19 +4,50 @@
 
 {% block content %}
     <div class="main-section" id="main-home">
-        <h1 class="hero-title">Your Cornwall<br> walks, <span class="accent-word">beautifully</span> mapped.</h1>
-        <p class="hero-sub">
-            Discover the most beautiful walking routes in Cornwall<br>
-            Upload routes, photos, and practical details — tide notes, parking, dog friendliness — so others can discover your favourite stretches.
-        </p>
-        <a href="{% url 'walk_list' %}" class="btn-primary">
-            Explore Walks
-        </a>
+        <div class="container py-5 text-center">
+            <h1 class="hero-title mb-4">Your Cornwall<br> walks, <span class="accent-word">beautifully</span> mapped.</h1>
+            <p class="hero-sub lead mb-4">
+                Discover the most beautiful walking routes in Cornwall<br>
+                Upload routes, photos, and practical details — tide notes, parking, dog friendliness — so others can discover your favourite stretches.
+            </p>
+            <a href="{% url 'walk_list' %}" class="btn btn-primary btn-lg">
+                Explore Walks
+            </a>
+        </div>
 
- <div class="featured-section">
+        <!-- Section to show total walks added and total distance on homepage -->
+
+<div class="container py-4">
+            <h2 class="mb-4">Site Stats</h2>
+            <div class="row g-4">
+                <div class="col-12 col-md-6">
+                    <div class="card shadow-sm">
+                        <div class="card-body text-center">
+                            <h3 class="display-4">{{ walk_count }}</h3>
+                            <p class="card-text text-muted">Walks Added</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="card shadow-sm">
+                        <div class="card-body text-center">
+                            <h3 class="display-4">{{ total_distance|floatformat:1 }}</h3>
+                            <p class="card-text text-muted">Total Distance (km)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+<!-- Section to show featured walks -->
+          <div class="featured-section">
         <div class="container py-4">
             <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-3">
                 <h2 class="mb-0">Featured Walks</h2>
+                <div class="stats-section">
+        
+    </div>
                 <a class="btn btn-outline-secondary" href="{% url 'walk_list' %}">See all walks</a>
             </div>
 
@@ -36,7 +67,7 @@
                                     <h3 class="card-title h5">{{ walk.title }}</h3>
                                     <p class="card-text text-muted small mb-3">{{ walk.location }}</p>
                                     <p class="card-text">{{ walk.description|striptags|truncatewords_html:16 }}</p>
-                                    <a class="btn btn-primary mt-auto" href="{% url 'walk_detail' walk.pk %}">View details</a>
+                                    <a class="btn btn-primary mt-auto" href="{% url 'walk_detail' walk.slug %}">View details</a>
                                 </div>
                             </div>
                         </div>
@@ -47,6 +78,13 @@
             {% endif %}
         </div>
     </div>
+    
+
+    </div>
+
+
+
+  
 
     </div>
     
