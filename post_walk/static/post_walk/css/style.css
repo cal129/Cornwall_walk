@@ -21,9 +21,9 @@ header {
     -webkit-backdrop-filter: blur(8px);
 }
 
-header h1 {
+.site-title {
     font-size: 24px;font-family:fraunces ;
-    color: #191a19;
+    color: #1a1a19;
 }
 
 header > div {
@@ -62,6 +62,7 @@ nav a {
     height: 100%;
 }
 
+
 h2, h3 {
     font-family: 'Fraunces', serif;
 }
@@ -71,6 +72,7 @@ html,
 body {
     height: 100%;
     font-family: 'jakarta', sans-serif;
+    text-align: left;
 }
 body {
     font-family: jakarta, sans-serif;
@@ -78,12 +80,12 @@ body {
     flex-direction: column;
     min-height: 100vh;
     background: #f0f2f5;
+    text-align: left;
 }
 .hero-title {
     font-family: 'Fraunces', serif;
-    font-size: 36px;
+    font-size: 86px;
     color: #333;
-    padding-left: 50px;
     text-align: left;
 }
 .accent-word {
@@ -101,10 +103,40 @@ main {
     flex: 1;
 }
 
+.main-btn {
+    font-family: 'jakarta', sans-serif;
+    padding: 15px 30px;
+    font-size: 18px;
+    border-radius: 40px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    background-color: #719cd9;
+    border-color: #010101;
+    border-width: 1.5px;
+}
+
+.scnd-btn {
+    font-family: 'jakarta', sans-serif;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 40px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    background-color: transparent;
+    border-color: #010101;
+    border-width: 1.5px;
+    color: #010101;
+}
+
+.main-btn:hover {
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    background-color: #d9c171;
+    border-color: #010101;
+}
+
 /* Ensure footer is pushed to the bottom in the column flex layout */
 footer {
     margin-top: auto;
     background-color: rgb(247, 254, 255);
+    border-top: 1.2px solid #727272;
 }
 
 

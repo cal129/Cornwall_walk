@@ -1,5 +1,4 @@
 from django.db.models import Sum
-from django.shortcuts import render, redirect
 from .models import postwalk, Comment
 from .forms import CommentForm
 from django.contrib import messages
@@ -16,7 +15,7 @@ def walk_list(request):
 def walk_detail(request, slug):
     walk = postwalk.objects.get(slug=slug)  # Get walk by slug
     comments = walk.comments.filter(authorised=True)  # Get all approved comments
-    
+
     if request.method == 'POST':
         comment_form = CommentForm(request.POST)
         if comment_form.is_valid():
@@ -28,12 +27,13 @@ def walk_detail(request, slug):
             return redirect('walk_detail', slug=slug)
     else:
         comment_form = CommentForm()
-    
+
     return render(request, 'walks/walk_detail.html', {
         'walk': walk,
         'comments': comments,
         'comment_form': comment_form
     })
+
 
 # Home page
 def index(request):
@@ -50,7 +50,7 @@ def index(request):
 # Delete a comment
 def delete_comment(request, comment_id):
     comment = get_object_or_404(Comment, id=comment_id)
-    
+
     # Only allow the comment owner to delete it
     if request.user == comment.user:
         walk_slug = comment.walk.slug
