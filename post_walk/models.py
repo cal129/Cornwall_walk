@@ -37,3 +37,17 @@ class postwalk(models.Model):
     date_added = models.DateTimeField(auto_now_add=True)
     authorised = models.BooleanField(default=False)
     featured = models.BooleanField(default=False)
+
+
+class Comment(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='comments')
+    walk = models.ForeignKey(postwalk, on_delete=models.CASCADE, related_name='comments')
+    content = models.TextField()
+    created_date = models.DateTimeField(auto_now_add=True)
+    authorised = models.BooleanField(default=False)
+
+    class Meta:
+        ordering = ['-created_date']  # Show newest comments first
+
+    def __str__(self):
+        return f'Comment by {self.user.username} on {self.walk.title}'
