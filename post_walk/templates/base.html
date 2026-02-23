@@ -38,8 +38,11 @@
                 </a>
                 <nav>
                     <a href="/">Home</a>
-                    <a href="{% url 'walk_list' %}">All Walks</a>
-                    <a href="/admin">Admin</a>
+                    <a href="{% url 'walk_list' %}">Explore Walks</a>
+                    {% if user.is_authenticated %}
+                    <a href="{% url 'walk_create' %}">Add Walk</a>
+                    {% endif %}
+                 
                     {% if user.is_authenticated %}
                     <li class="nav-item">
                         <a

@@ -13,6 +13,9 @@
             <a href="{% url 'walk_list' %}" class="btn btn-primary btn-lg main-btn">
                 Explore Walks
             </a>
+             {% if user.is_authenticated %}
+                    <a href="{% url 'walk_create' %}" class="btn btn-outline-secondary scnd-btn">Add Walk</a>
+                    {% endif %}
         </div>
 
         <!-- Section to show total walks added and total distance on homepage -->
@@ -76,7 +79,9 @@
             {% else %}
                 <p class="text-muted">No featured walks yet.</p>
             {% endif %}
-            <a class="btn btn-outline-secondary scnd-btn text-center" href="{% url 'walk_list' %}">See all walks</a>
+            <div class="text-center mt-4">
+            <a class="btn btn-outline-secondary main-btn text-center featured-btn" href="{% url 'walk_list' %}">See all walks</a>
+            </div>
         </div>
             
     </div>

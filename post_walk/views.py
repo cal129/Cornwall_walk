@@ -3,6 +3,8 @@ from .models import postwalk, Comment
 from .forms import CommentForm
 from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
+from .forms import WalkForm
 
 
 # List all walks
@@ -60,3 +62,16 @@ def delete_comment(request, comment_id):
     else:
         messages.error(request, 'You can only delete your own comments.')
         return redirect('walk_detail', slug=comment.walk.slug)
+
+@login_required
+def walk_create(request):
+    if request.method == 'POST':
+        form = WalkForm(request.POST, request.FILES)
+        if form.is_valid():
+            walk = form.save(commit=False)
+            walk.user = request.user
+            walk.save()
+            return redirect('walk_detail', slug=walk.slug)
+    else:
+        form = WalkForm()
+    return render(request, 'walks/walk_form.html', {'form': form})
