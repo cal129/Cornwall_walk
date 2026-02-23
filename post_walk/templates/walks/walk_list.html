@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
-
-{% block title %}All Walks - Cornwall Walks{% endblock %}
+{% load static %}
 
 {% block extra_css %}{% endblock %}
 
@@ -13,8 +12,10 @@
                 {% for walk in walks %}
                                         <div class="col-12 col-md-4">
                         <div class="card h-100 position-relative">
-                            {% if walk.photo %}
+                            {% if walk.photo and walk.photo.public_id != 'placeholder' %}
                                 <img class="card-img-top" src="{{ walk.photo.url }}" alt="{{ walk.title }}">
+                            {% else %}
+                                <img class="card-img-top" src="{% static 'post_walk/images/default-walk.jpg' %}" alt="Default walk image">
                             {% endif %}
                             <div class="card-overlay">
                                 <h2 class="card-title h5">{{ walk.title|capfirst }}</h2>
@@ -24,7 +25,6 @@
                                 <div class="d-flex flex-wrap gap-2 mb-2">
                                     <span class="badge-circle">{{ walk.get_difficulty_display }}</span>
                                     <span class="badge-circle">{{ walk.get_type_display }}</span>
-                                    
                                 </div>
                                 <ul class="list-unstyled small text-muted mb-3">
                                     <li><span class="fw-semibold">Location:</span> {{ walk.location|capfirst }}</li>

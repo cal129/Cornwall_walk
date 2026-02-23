@@ -1,15 +1,16 @@
 from django.db.models import Sum
 from .models import postwalk, Comment
 from .forms import CommentForm
+from django.utils.text import slugify
 from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .forms import WalkForm
 
 
-# List all walks
+# List all aproved walks
 def walk_list(request):
-    walks = postwalk.objects.all()  # Get all walks from database
+    walks = postwalk.objects.filter(authorised=True)
     return render(request, 'walks/walk_list.html', {'walks': walks})
 
 
@@ -39,9 +40,9 @@ def walk_detail(request, slug):
 
 # Home page
 def index(request):
-    featured_walks = postwalk.objects.filter(featured=True).order_by('-date_added')[:3]
-    walk_count = postwalk.objects.count()  # Counts total walks
-    total_distance = postwalk.objects.aggregate(Sum('distance'))['distance__sum'] or 0  # Sums all distances
+    featured_walks = postwalk.objects.filter(featured=True, authorised=True).order_by('-date_added')[:3]
+    walk_count = postwalk.objects.filter(authorised=True).count()  # Counts only approved walks
+    total_distance = postwalk.objects.filter(authorised=True).aggregate(Sum('distance'))['distance__sum'] or 0  # Sums only approved walks
     return render(request, 'index.html', {
         'featured_walks': featured_walks,
         'walk_count': walk_count,
@@ -70,8 +71,10 @@ def walk_create(request):
         if form.is_valid():
             walk = form.save(commit=False)
             walk.user = request.user
+            walk.slug = slugify(walk.title)
             walk.save()
-            return redirect('walk_detail', slug=walk.slug)
+            messages.success(request, 'Your walk has been submitted and is awaiting approval!')
+            return redirect('walk_list')
     else:
         form = WalkForm()
     return render(request, 'walks/walk_form.html', {'form': form})

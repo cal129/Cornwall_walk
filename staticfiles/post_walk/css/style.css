@@ -9,15 +9,21 @@
 
 /* header styles */
 header {
-    background-color: rgb(255, 255, 255);
+    background-color: rgba(255, 255, 255, 0.5);
     padding: 5px;
     padding-left: 50px;
-    border-bottom: 2px solid #232323;
+    border-bottom: 1.2px solid #727272;
+    box-shadow: #333 0px 1px 5px;
+    position: sticky;
+    top: 0;
+    z-index: 1030;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
 }
 
-header h1 {
+.site-title {
     font-size: 24px;font-family:fraunces ;
-    color: #191a19;
+    color: #1a1a19;
 }
 
 header > div {
@@ -35,7 +41,13 @@ header div div {
 
 nav {
     display: flex;
+    list-style: none;
     gap: 15px;
+    padding-right: 100px;
+}
+
+nav li {
+    list-style: none;
 }
 
 nav a {
@@ -52,24 +64,41 @@ nav a {
 /*main page styles */
 
 #main-home {
-    background: linear-gradient(135deg, #badae9, #ebecdb, #a7d5bb);
-    height: 400px;
+    background: linear-gradient(135deg, #ebf8fe, #f2ead9, #f1f9f4);
+    height: 100%;
 }
+
+
+h2, h3 {
+    font-family: 'Fraunces', serif;
+}
+
 
 html,
 body {
     height: 100%;
+    font-family: 'jakarta', sans-serif;
+    text-align: left;
 }
 body {
-    font-family: Arial, sans-serif;
+    font-family: jakarta, sans-serif;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
     background: #f0f2f5;
+    text-align: left;
 }
-
+.hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: 86px;
+    color: #333;
+    text-align: left;
+}
 .accent-word {
-    color: #ff6347; /* Accent color for the word "beautifully" */
+    background: linear-gradient(to right, #559ac5, #d9c171);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
 }
 
 h1 {
@@ -80,10 +109,91 @@ main {
     flex: 1;
 }
 
+.main-btn {
+    font-family: 'jakarta', sans-serif;
+    padding: 15px 30px;
+    font-size: 18px;
+    border-radius: 40px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    background-color: #f1e4b0;
+    border-color: #010101;
+    border-width: 1.5px;
+    color: #1a1a19;
+}
+
+.main-btn:hover {
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    background-color: #559ac5;
+    border-color: #010101;
+}
+
+.scnd-btn {
+    font-family: 'jakarta', sans-serif;
+    padding: 15px 30px;
+    font-size: 16px;
+    border-radius: 40px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    background-color: transparent;
+    border-color: #010101;
+    border-width: 1.5px;
+    color: #010101;
+}
+
+.scnd-btn:hover {
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    background-color: rgba(210, 214, 219, 0.696);
+    border-color: #010101;
+    color: #010101;
+}
+
+
+
+/* card styling */
+.card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 30px;
+}
+
+.card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.4), transparent);
+    color: white;
+    padding: 20px;
+    z-index: 10;
+}
+
+.card-overlay .card-title {
+    color: white;
+    margin-bottom: 5px;
+}
+
+.card-location {
+    color: rgba(255,255,255,0.9);
+    margin: 0;
+    font-size: 14px;
+}
+
+.badge-circle {
+    border-radius: 20px;
+    border-color: #010101;
+    color: rgb(35, 35, 35);
+    background-color: #add4da;
+    padding: 0.5em 0.9em;
+    font-size: 0.75em;
+    display: inline-block;
+    min-width: 2.5em;
+    text-align: center;
+}
+
 /* Ensure footer is pushed to the bottom in the column flex layout */
 footer {
     margin-top: auto;
-    background-color: rgb(181, 211, 213);
+    background-color: rgb(247, 254, 255);
+    border-top: 1.2px solid #727272;
 }
 
 
