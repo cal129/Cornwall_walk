@@ -37,10 +37,10 @@
                     </div>
                 </a>
                 <nav>
-                    <a href="/">Home</a>
-                    <a href="{% url 'walk_list' %}">Explore Walks</a>
+                    <a class="nav-link" href="/">Home</a>
+                    <a class="nav-link" href="{% url 'walk_list' %}"><i class="fa-regular fa-compass"></i> Explore Walks</a>
                     {% if user.is_authenticated %}
-                    <a href="{% url 'walk_create' %}">Add Walk</a>
+                    <a class="nav-link" href="{% url 'walk_create' %}"><i class="fa-solid fa-cloud-arrow-up"></i> Add Walk</a>
                     {% endif %}
                  
                     {% if user.is_authenticated %}
@@ -108,7 +108,7 @@
                 </div>
             </div>
         </footer>
-
+<script src="https://kit.fontawesome.com/9513d18648.js" crossorigin="anonymous"></script>
         {% block extra_js %}{% endblock %}
     </body>
 </html>

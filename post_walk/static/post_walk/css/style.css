@@ -68,6 +68,10 @@ nav a {
     height: 100%;
 }
 
+h1 {
+    margin: 0;
+    font-family: 'Fraunces', serif;
+}
 
 h2, h3 {
     font-family: 'Fraunces', serif;
@@ -101,9 +105,7 @@ body {
     color: transparent;
 }
 
-h1 {
-    margin: 0;
-}
+
 
 main {
     flex: 1;
@@ -146,7 +148,16 @@ main {
     color: #010101;
 }
 
+.nav-link {
+    color: rgb(31, 31, 31);
+    padding: 8px 12px;
+    border-radius: 20px;
+}
 
+.nav-link:hover {
+    color: #559ac5;
+
+}
 
 /* card styling */
 .card {
@@ -191,9 +202,10 @@ main {
 
 /* Ensure footer is pushed to the bottom in the column flex layout */
 footer {
+    padding-top: 50px;
     margin-top: auto;
-    background-color: rgb(247, 254, 255);
+    background-color: rgba(247, 254, 255, 0.1);
     border-top: 1.2px solid #727272;
+    font-family:fraunces ;
 }
-
 

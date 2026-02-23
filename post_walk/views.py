@@ -64,6 +64,7 @@ def delete_comment(request, comment_id):
         messages.error(request, 'You can only delete your own comments.')
         return redirect('walk_detail', slug=comment.walk.slug)
 
+
 @login_required
 def walk_create(request):
     if request.method == 'POST':

@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block title %}{{ walk.title }} - Cornwall Walks{% endblock %}
 
 {% block extra_css %}
@@ -23,20 +23,17 @@
         <div class="row g-4">
             <div class="col-12 col-lg-7">
                 <div class="card shadow-sm">
-                    {% if walk.photo %}
-                        <img class="card-img-top" src="{{ walk.photo.url }}" alt="{{ walk.title }}">
-                    {% endif %}
+                    {% if walk.photo and walk.photo.public_id != 'placeholder' %}
+                                <img class="card-img-top" src="{{ walk.photo.url }}" alt="{{ walk.title }}">
+                            {% else %}
+                                <img class="card-img-top" src="{% static 'post_walk/images/default-walk.jpg' %}" alt="Default walk image">
+                            {% endif %}
                     <div class="card-body">
                         <h1 class="card-title h3 mb-3">{{ walk.title }}</h1>
                         <div class="d-flex flex-wrap gap-2 mb-3">
-                            <span class="badge bg-success">{{ walk.get_difficulty_display }}</span>
-                            <span class="badge bg-info text-dark">{{ walk.get_type_display }}</span>
-                            {% if walk.featured %}
-                                <span class="badge bg-warning text-dark">Featured</span>
-                            {% endif %}
-                            {% if walk.authorised %}
-                                <span class="badge bg-primary">Approved</span>
-                            {% endif %}
+                            <span class="badge-circle">{{ walk.get_difficulty_display }}</span>
+                            <span class="badge-circle">{{ walk.get_type_display }}</span>
+                           
                         </div>
                         <h2 class="h5">Description</h2>
                         <div class="card-text">{{ walk.description|safe }}</div>
@@ -51,7 +48,7 @@
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item d-flex justify-content-between">
                                 <span class="text-muted">Location</span>
-                                <span class="fw-semibold">{{ walk.location }}</span>
+                                <span class="fw-semibold">{{ walk.location|capfirst }}</span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between">
                                 <span class="text-muted">Coordinates</span>
@@ -75,7 +72,7 @@
                             </li>
                             <li class="list-group-item d-flex justify-content-between">
                                 <span class="text-muted">Author</span>
-                                <span class="fw-semibold">{{ walk.user.username }}</span>
+                                <span class="fw-semibold">{{ walk.user.username|capfirst }}</span>
                             </li>
                         </ul>
                     </div>
