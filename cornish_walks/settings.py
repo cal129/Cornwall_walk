@@ -78,7 +78,9 @@ ROOT_URLCONF = 'cornish_walks.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            BASE_DIR / 'templates',  # This should come FIRST
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

@@ -8,6 +8,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="icon" type="image/x-icon" href="{% static 'post_walk/images/favicon.ico' %}">
         <title>{% block title %}Sand & Trails{% endblock %}</title>
         <style>
             @import url("https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap");
@@ -19,59 +20,37 @@
             integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
             crossorigin="anonymous"
         />
+        
         <link rel="stylesheet" href="{% static 'post_walk/css/style.css' %}" />
         {% block extra_css %}{% endblock %}
     </head>
     <body>
         <!-- Header -->
         <header>
-            <div>
-                <a href="/" style="text-decoration: none; color: inherit;">
-                    <div>
-                        <img
-                            class="logo"
-                            src="{% static 'post_walk/images/logo.png' %}"
-                            alt="Sand & Trails Logo"
-                        />
+            <nav class="navbar navbar-expand-lg sticky-top" data-bs-theme="dark">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="/">
+                        <img class="logo" src="{% static 'post_walk/images/logo.png' %}" alt="Sand & Trails Logo"/>
                         <span class="site-title">Sand & Trails</span>
+                    </a>
+                    <button class="navbar-toggler nav-style" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <div class="navbar-nav ms-auto">
+                            <a class="nav-link" href="/">Home</a>
+                            <a class="nav-link" href="{% url 'walk_list' %}"><i class="fa-regular fa-compass"></i> Explore Walks</a>
+                            {% if user.is_authenticated %}
+                            <a class="nav-link" href="{% url 'walk_create' %}"><i class="fa-solid fa-cloud-arrow-up"></i> Add Walk</a>
+                            <a class="nav-link" href="{% url 'account_logout' %}">Logout</a>
+                            {% else %}
+                            <a class="nav-link" href="{% url 'account_signup' %}">Register</a>
+                            <a class="nav-link" href="{% url 'account_login' %}">Login</a>
+                            {% endif %}
+                        </div>
                     </div>
-                </a>
-                <nav>
-                    <a class="nav-link" href="/">Home</a>
-                    <a class="nav-link" href="{% url 'walk_list' %}"><i class="fa-regular fa-compass"></i> Explore Walks</a>
-                    {% if user.is_authenticated %}
-                    <a class="nav-link" href="{% url 'walk_create' %}"><i class="fa-solid fa-cloud-arrow-up"></i> Add Walk</a>
-                    {% endif %}
-                 
-                    {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <a
-                            class="nav-link {% if request.path == logout_url %}active{% endif %}"
-                            aria-current="page"
-                            href="{% url 'account_logout' %}"
-                            >Logout</a
-                        >
-                    </li>
-                    {% else %}
-                    <li class="nav-item">
-                        <a
-                            class="nav-link {% if request.path == signup_url %}active{% endif %}"
-                            aria-current="page"
-                            href="{% url 'account_signup' %}"
-                            >Register</a
-                        >
-                    </li>
-                    <li class="nav-item">
-                        <a
-                            class="nav-link {% if request.path == login_url %}active{% endif %}"
-                            aria-current="page"
-                            href="{% url 'account_login' %}"
-                            >Login</a
-                        >
-                    </li>
-                    {% endif %}
-                </nav>
-            </div>
+                </div>
+            </nav>
         </header>
 
         <!-- Messages -->
@@ -98,17 +77,15 @@
                         <p class="mb-0 text-muted">Discover the beauty of Cornwall</p>
                     </div>
                     <div class="col-md-6 text-center text-md-end">
-                        <div class="mb-2">
-                            <a href="#" class="text-light text-decoration-none me-3">About</a>
-                            <a href="#" class="text-light text-decoration-none me-3">Contact</a>
-                            <a href="#" class="text-light text-decoration-none">Privacy</a>
-                        </div>
+                        
                         <p class="mb-0 text-muted small">&copy; 2026 Sand & Trails</p>
                     </div>
                 </div>
             </div>
         </footer>
+         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://kit.fontawesome.com/9513d18648.js" crossorigin="anonymous"></script>
+
         {% block extra_js %}{% endblock %}
     </body>
 </html>
