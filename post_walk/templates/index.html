@@ -2,6 +2,18 @@
 {% load static %}
 {% block title %}Home - Sand & Trails{% endblock %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
+<style>
+    #walk-map {
+        height: 500px;
+        border-radius: 20px;
+        margin: 2rem 0;
+        box-shadow: 0 10px 30px rgba(17, 24, 39, 0.1);
+    }
+</style>
+{% endblock %}
+
 {% block content %}
     <div class="main-section" id="main-home">
         <div class="container py-5">
@@ -17,7 +29,7 @@
                     <a href="{% url 'walk_create' %}" class="btn btn-outline-secondary scnd-btn">Add Walk</a>
                     {% endif %}
         </div>
-
+        
         <!-- Section to show total walks added and total distance on homepage -->
 
 <div class="container py-4">
@@ -41,6 +53,14 @@
                 </div>
             </div>
         </div>
+
+        <!-- Map section showing all walk locations -->
+        <div class="container">
+            <div id="walk-map"></div>
+            <script type="application/json" id="walk-markers-data">{{ walk_markers|safe }}</script>
+        </div>
+
+
 
 
 <!-- Section to show featured walks -->
@@ -105,4 +125,9 @@
     </div>
     
    
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="{% static 'post_walk/js/map.js' %}"></script>
 {% endblock %}

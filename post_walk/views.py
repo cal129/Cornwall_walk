@@ -7,6 +7,26 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .forms import WalkForm
 from django.core.paginator import Paginator
+import json
+import re
+
+
+def parse_coordinates(coord_string):
+    """
+    Parse coordinate string like '49.9250° N, 6.2987° W' into (lat, lng).
+    Returns None if parsing fails.
+    """
+    try:
+        pattern = r'([\d.]+)°\s*([NS]),\s*([\d.]+)°\s*([EW])'
+        match = re.match(pattern, coord_string.strip())
+        if not match:
+            return None
+        lat_val, lat_dir, lng_val, lng_dir = match.groups()
+        lat = float(lat_val) * (1 if lat_dir == 'N' else -1)
+        lng = float(lng_val) * (1 if lng_dir == 'E' else -1)
+        return (lat, lng)
+    except (ValueError, AttributeError):
+        return None
 
 
 # List all aproved walks
@@ -58,10 +78,26 @@ def index(request):
     featured_walks = postwalk.objects.filter(featured=True, authorised=True).order_by('-date_added')[:3]
     walk_count = postwalk.objects.filter(authorised=True).count()  # Counts only approved walks
     total_distance = postwalk.objects.filter(authorised=True).aggregate(Sum('distance'))['distance__sum'] or 0  # Sums only approved walks
+    
+    # Gather all walks with coordinates for the map
+    all_walks = postwalk.objects.filter(authorised=True)
+    walk_markers = []
+    for walk in all_walks:
+        coords = parse_coordinates(walk.coordinates)
+        if coords:
+            walk_markers.append({
+                'title': walk.title,
+                'lat': coords[0],
+                'lng': coords[1],
+                'slug': walk.slug,
+                'location': walk.location
+            })
+    
     return render(request, 'index.html', {
         'featured_walks': featured_walks,
         'walk_count': walk_count,
-        'total_distance': total_distance
+        'total_distance': total_distance,
+        'walk_markers': json.dumps(walk_markers)
     })
 
 
