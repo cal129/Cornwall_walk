@@ -17,7 +17,7 @@ def walk_list(request):
 # Show one walk's details
 def walk_detail(request, slug):
     walk = postwalk.objects.get(slug=slug)  # Get walk by slug
-    comments = walk.comments.filter(authorised=True)  # Get all approved comments
+    comments = walk.comments.filter(approved=True)  # Get all approved comments
 
     if request.method == 'POST':
         comment_form = CommentForm(request.POST)
@@ -79,3 +79,26 @@ def walk_create(request):
     else:
         form = WalkForm()
     return render(request, 'walks/walk_form.html', {'form': form})
+
+
+@login_required
+def comment_edit(request, comment_id):
+    """View to edit a comment"""
+    comment = get_object_or_404(Comment, id=comment_id)
+
+    # Check if user owns the comment
+    if comment.user != request.user:
+        messages.error(request, "You can only edit your own comments.")
+        return redirect('walk_detail', slug=comment.walk.slug)
+
+    if request.method == 'POST':
+        form = CommentForm(request.POST, instance=comment)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.approved = False  # Set to not approved
+            comment.edited = True     # Mark as edited
+            comment.save()
+            messages.success(request, "Comment updated! It will be visible once approved by an admin.")
+            return redirect('walk_detail', slug=comment.walk.slug)
+
+    return redirect('walk_detail', slug=comment.walk.slug)

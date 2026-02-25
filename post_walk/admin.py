@@ -16,11 +16,11 @@ class PostAdmin(SummernoteModelAdmin):
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ('user', 'walk', 'created_date', 'authorised')
-    list_filter = ('authorised', 'created_date')
+    list_display = ('user', 'walk', 'created_at', 'approved')
+    list_filter = ('approved', 'created_at')
     search_fields = ['user__username', 'walk__title', 'content']
     actions = ['approve_comments']
 
     def approve_comments(self, request, queryset):
-        queryset.update(authorised=True)
+        queryset.update(approved=True)
     approve_comments.short_description = 'Approve selected comments'
