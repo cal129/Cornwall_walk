@@ -467,4 +467,8 @@ footer {
     .navbar {
         padding: 5px 20px !important;
     }
+
+    .hero-title {
+        font-size: 48px;
+    }
 }
