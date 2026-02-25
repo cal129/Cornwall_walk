@@ -5,7 +5,21 @@
 
 {% block content %}
     <div class="container py-3">
-        <h1 class="mb-4">All Walks</h1>
+        <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-md-between gap-3 mb-4">
+            <h1 class="mb-0">All Walks</h1>
+            <form method="get" class="d-flex align-items-center gap-2 walk-sort">
+                <label for="sort" class="small text-muted">Order by</label>
+                <select id="sort" name="sort" class="form-select walk-sort__select" onchange="this.form.submit()">
+                    <option value="newest" {% if sort == 'newest' %}selected{% endif %}>Newest</option>
+                    <option value="oldest" {% if sort == 'oldest' %}selected{% endif %}>Oldest</option>
+                    <option value="distance_asc" {% if sort == 'distance_asc' %}selected{% endif %}>Distance (shortest)</option>
+                    <option value="distance_desc" {% if sort == 'distance_desc' %}selected{% endif %}>Distance (longest)</option>
+                    <option value="duration_asc" {% if sort == 'duration_asc' %}selected{% endif %}>Duration (shortest)</option>
+                    <option value="duration_desc" {% if sort == 'duration_desc' %}selected{% endif %}>Duration (longest)</option>
+                    <option value="type" {% if sort == 'type' %}selected{% endif %}>Type</option>
+                </select>
+            </form>
+        </div>
 
         {% if walks %}
             <div class="row g-4">
@@ -38,6 +52,65 @@
                     </div>
                 {% endfor %}
             </div>
+
+            <!-- Pagination -->
+            {% if walks.has_other_pages %}
+                <div class="walk-pagination mt-5">
+                    <div class="walk-pagination__info">
+                        Page {{ walks.number }} of {{ walks.paginator.num_pages }}
+                    </div>
+                    <nav aria-label="Page navigation">
+                    <ul class="pagination justify-content-center">
+                        <!-- Previous Page -->
+                        {% if walks.has_previous %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page=1&sort={{ sort }}">First</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ walks.previous_page_number }}&sort={{ sort }}">Previous</a>
+                            </li>
+                        {% else %}
+                            <li class="page-item disabled">
+                                <span class="page-link">First</span>
+                            </li>
+                            <li class="page-item disabled">
+                                <span class="page-link">Previous</span>
+                            </li>
+                        {% endif %}
+
+                        <!-- Page Numbers -->
+                        {% for num in walks.paginator.page_range %}
+                            {% if walks.number == num %}
+                                <li class="page-item active">
+                                    <span class="page-link">{{ num }}</span>
+                                </li>
+                            {% else %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ num }}&sort={{ sort }}">{{ num }}</a>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+
+                        <!-- Next Page -->
+                        {% if walks.has_next %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ walks.next_page_number }}&sort={{ sort }}">Next</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ walks.paginator.num_pages }}&sort={{ sort }}">Last</a>
+                            </li>
+                        {% else %}
+                            <li class="page-item disabled">
+                                <span class="page-link">Next</span>
+                            </li>
+                            <li class="page-item disabled">
+                                <span class="page-link">Last</span>
+                            </li>
+                        {% endif %}
+                    </ul>
+                    </nav>
+                </div>
+            {% endif %}
         {% else %}
             <p>No walks found.</p>
         {% endif %}

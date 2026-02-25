@@ -6,12 +6,27 @@ from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .forms import WalkForm
+from django.core.paginator import Paginator
 
 
 # List all aproved walks
 def walk_list(request):
-    walks = postwalk.objects.filter(authorised=True)
-    return render(request, 'walks/walk_list.html', {'walks': walks})
+    sort = request.GET.get('sort', 'oldest')
+    sort_map = {
+        'newest': ['-date_added'],
+        'oldest': ['date_added'],
+        'distance_asc': ['distance', 'title'],
+        'distance_desc': ['-distance', 'title'],
+        'duration_asc': ['time_hours', 'time_minutes', 'title'],
+        'duration_desc': ['-time_hours', '-time_minutes', 'title'],
+        'type': ['type', 'title'],
+    }
+    order_by_fields = sort_map.get(sort, sort_map['newest'])
+    walks_list = postwalk.objects.filter(authorised=True).order_by(*order_by_fields)
+    paginator = Paginator(walks_list, 6)  # 6 walks per page
+    page_number = request.GET.get('page')
+    walks = paginator.get_page(page_number)
+    return render(request, 'walks/walk_list.html', {'walks': walks, 'sort': sort})
 
 
 # Show one walk's details

@@ -1,6 +1,7 @@
 from django import forms
 from .models import Comment
 from .models import postwalk
+from django_summernote.widgets import SummernoteWidget
 
 
 class CommentForm(forms.ModelForm):
@@ -26,7 +27,7 @@ class WalkForm(forms.ModelForm):
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Walk title'}),
             'location': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Location'}),
-            'description': forms.Textarea(attrs={'class': 'form-control', 'rows': 4, 'placeholder': 'Description'}),
+            'description': SummernoteWidget(),
             'distance': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Distance (km)'}),
             'time_hours': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Hours'}),
             'time_minutes': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Minutes'}),
