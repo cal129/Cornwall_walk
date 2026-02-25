@@ -198,6 +198,14 @@ main {
     border-radius: 30px;
 }
 
+.card img,
+.card-img-top {
+    height: 250px;
+    object-fit: cover;
+    width: 100%;
+    display: block;
+}
+
 .card-overlay {
     position: absolute;
     top: 0;
@@ -232,6 +240,55 @@ main {
     text-align: center;
 }
 
+/* Weather Widget Styling */
+.weather-info {
+    text-align: center;
+}
+
+.weather-temp {
+    font-size: 3rem;
+    font-weight: 600;
+    color: #1a1a19;
+    font-family: 'Fraunces', serif;
+}
+
+.weather-icon {
+    font-size: 6rem;
+    margin: 1rem 0;
+}
+
+.weather-description {
+    font-size: 1.2rem;
+    color: #6c757d;
+    text-transform: capitalize;
+    margin-bottom: 1rem;
+}
+
+.weather-details {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #dee2e6;
+}
+
+.weather-detail-item {
+    text-align: center;
+}
+
+.weather-detail-label {
+    font-size: 0.875rem;
+    color: #6c757d;
+    display: block;
+}
+
+.weather-detail-value {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #1a1a19;
+    display: block;
+    margin-top: 0.25rem;
+}
 
 /* Authentication Pages Styling */
 .auth-card {
