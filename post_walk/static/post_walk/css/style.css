@@ -33,7 +33,7 @@ header {
 
 /* Navbar styles */
 .navbar {
-    padding: 5px 50px !important;
+    padding: 5px 50px 
 }
 
 .navbar-brand {
@@ -90,7 +90,7 @@ header {
 
 .nav-link {
     color: rgb(31, 31, 31) !important;
-    padding: 8px 12px !important;
+    padding: 8px 12px 
     border-radius: 20px;
 }
 
@@ -465,10 +465,20 @@ footer {
 
 @media (max-width: 991px) {
     .navbar {
-        padding: 5px 20px !important;
+        padding: 5px 20px 
     }
 
     .hero-title {
         font-size: 48px;
     }
+
+    .logo-top {
+        padding-left: 0px;
+    }
+
+    header {
+        padding-left: 2px;
+    }
+
+    
 }
