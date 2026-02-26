@@ -1,1 +1,157 @@
-# Cornwall_walk
+# Sand & Trails
+
+## a community platform where hikers can discover, share, and discuss the most beautiful walking routes across Cornwall.
+
+Sand & Trails is a community platform dedicated to discovering and sharing the most beautiful walking routes across Cornwall. Whether you're a seasoned hiker or exploring new trails, the platform allows users to browse existing walks complete with detailed information, photos, and practical details. Users can also contribute their own favorite routes to help others discover hidden gems across the Cornish coastline and countryside. The community aspect is strengthened through an integrated commenting system, enabling hikers to share experiences, tips, and recommendations with fellow trail enthusiasts.
+
+
+<img src="post_walk/static/post_walk/images/readme/overview.png" width="800px"/>
+
+
+
+## Deployment
+
+Live site: https://cornish-walks-34ed89614ebb.herokuapp.com/
+
+
+
+
+## Design
+
+Sand & Trails is a user friendly, mobile first, responsive website using HTML5, CSS3, Bootstrap 5, JavaScript and Python.
+
+### Color pallete
+
+A nature inspired color pallete.
+<img src="post_walk/static/post_walk/images/readme/colors.png" width="800px">
+
+### User Features:
+
+- All users can view walks and their details.
+- Create an account, log in, and log out securely using Django-Allauth.
+- Authenticated users can add a walk to the website.
+- Authenticated users can comment on all walks. They can edit and delete their own comments.
+- Admin account can authorise walks and comments before other users can view them.
+
+
+
+### Database
+
+I have configured a secure Django web framework with a connected PostgreSQL database and custom models for the application. I used the ERD bellow to plan the structure for my databse models.
+
+<img src="post_walk/static/post_walk/images/readme/ERD.png" width="800px"/>
+
+### CRUD functionality
+Full CRUD functionality is implemented and tested with logged-in users able to:
+
+Create:
+- Use a form to post a walk
+- add comments to a walk item
+
+Read
+- can read their own un-authorsed comments
+- view all walks
+
+Update
+- edit their comment
+
+Delete
+- a User can delete their own comment
+
+
+### User Stories
+
+I created user stories to prioritise the most important features using the must have, could have and should have catagory tags. This allowed focus to be on the most important features and helped to achieve the MVP in the timeframe.
+
+My User stories can be found <a href="https://github.com/users/cal129/projects/5">here</a>
+
+A few examples bellow:
+---
+A visitor wants to browse a list of walks to find something interesting.
+
+Acceptance Criteria:
+
+
+• The home page displays a list of walks.
+
+• Each walk shows title, location, distance, and difficulty.
+
+• The list loads automatically when the page opens.
+
+---
+
+A visitor wants to view full details of a walk.
+
+
+• Clicking a walk opens a detail page.
+
+• The page shows description, distance, time, location, and difficulty.
+
+• The page loads without requiring login.
+
+---
+
+A logged‑in user wants to comment on a walk.
+
+Acceptance Criteria:
+
+
+• A comment box is available when logged in.
+
+• Submitted comments are stored as “pending approval.”
+
+• Users can see their own pending comments.
+
+---
+
+I used the agile method of "Backlog, To do, In progress and Done" to keep track of user stories and features.
+<img src="post_walk/static/post_walk/images/readme/Kanban.png" width="800px"/>
+
+
+
+
+### Wire Frames
+Homepage wire frame design on desktop and mobile
+<img src="post_walk/static/post_walk/images/readme/wirefram home.png" width="800px"/>
+
+List of walks page wireframe
+<img src="post_walk/static/post_walk/images/readme/wire frame all walks.png" width="800px"/>
+
+walk details wireframe
+<img src="post_walk/static/post_walk/images/readme/wire fram walk detail.png" width="800px"/>
+
+
+## Notifications and confirmations
+
+I have added clear notification messages that inform users of data changes and confirmations to ensure they do not make deletions by accident.
+
+## Testing
+
+
+
+
+
+
+## Use of AI
+
+In this project, I used AI is a few ways to help my build the website.
+
+- Design
+
+Using co-pilot to design the logo and fav icon. 
+
+help with creating user stories.
+
+- Explanation 
+
+Asking what a specific line or block of code does.
+
+- code generation. 
+
+Asking for a step by step way of implementing a feature
+
+- Debugging 
+
+Pasting in errors to find a suggested solution
+
+
