@@ -3,17 +3,11 @@
 {% block title %}Home - Sand & Trails{% endblock %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
-<style>
-    #walk-map {
-        height: 500px;
-        border-radius: 20px;
-        margin: 2rem 0;
-        box-shadow: 0 10px 30px rgba(17, 24, 39, 0.1);
-    }
-</style>
-{% endblock %}
+<!-- link to leaflet map CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 
+{% endblock %}
+<!-- main area with heading and links to explore walks and add walk when logged in -->
 {% block content %}
     <div class="main-section" id="main-home">
         <div class="container py-5">
@@ -38,7 +32,7 @@
                 <div class="col-12 col-md-3">
                     <div class="card shadow-sm">
                         <div class="card-body text-center">
-                            <h3 class="display-4">{{ walk_count }}</h3>
+                            <h3 class="display-3">{{ walk_count }}</h3>
                             <p class="card-text text-muted">Walks</p>
                         </div>
                     </div>
@@ -46,7 +40,7 @@
                 <div class="col-12 col-md-3">
                     <div class="card shadow-sm">
                         <div class="card-body text-center">
-                            <h3 class="display-4">{{ total_distance|floatformat:1 }}</h3>
+                            <h3 class="display-3">{{ total_distance|floatformat:1 }}</h3>
                             <p class="card-text text-muted">Total Distance (km)</p>
                         </div>
                     </div>
@@ -65,7 +59,7 @@
 
 
 
-<!-- Section to show featured walks -->
+<!-- Section to show 3 featured walks -->
           <div class="featured-section">
         <div class="container py-4">
             <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-3">
@@ -117,14 +111,6 @@
             
     </div>
     
-
-    </div>
-
-
-
-  
-
-    </div>
     
    
 {% endblock %}

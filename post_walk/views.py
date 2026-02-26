@@ -79,7 +79,7 @@ def index(request):
     walk_count = postwalk.objects.filter(authorised=True).count()  # Counts only approved walks
     total_distance = postwalk.objects.filter(authorised=True).aggregate(Sum('distance'))['distance__sum'] or 0  # Sums only approved walks
     
-    # Gather all walks with coordinates for the map
+    # Gather all authorised walks with coordinates for the map
     all_walks = postwalk.objects.filter(authorised=True)
     walk_markers = []
     for walk in all_walks:
@@ -115,7 +115,7 @@ def delete_comment(request, comment_id):
         messages.error(request, 'You can only delete your own comments.')
         return redirect('walk_detail', slug=comment.walk.slug)
 
-
+# Post a walk - only if logged in.
 @login_required
 def walk_create(request):
     if request.method == 'POST':
@@ -131,7 +131,7 @@ def walk_create(request):
         form = WalkForm()
     return render(request, 'walks/walk_form.html', {'form': form})
 
-
+# Edit a comment - only if logged in and owns the comment.
 @login_required
 def comment_edit(request, comment_id):
     """View to edit a comment"""
