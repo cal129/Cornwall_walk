@@ -90,7 +90,7 @@ header {
 
 .nav-link {
     color: rgb(31, 31, 31) !important;
-    padding: 8px 12px 
+    padding: 8px 12px;
     border-radius: 20px;
 }
 
@@ -319,6 +319,14 @@ main {
     border-color: #559ac5;
     box-shadow: 0 0 0 0.2rem rgba(85, 154, 197, 0.25);
 }
+/* Map styling */
+ #walk-map {
+        height: 500px;
+        border-radius: 20px;
+        margin: 2rem 0;
+        box-shadow: 0 10px 30px rgba(17, 24, 39, 0.1);
+    }
+
 
 /* Weather Widget Styling */
 .weather-info {
