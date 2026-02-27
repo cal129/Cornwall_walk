@@ -16,11 +16,11 @@
                 Discover the most beautiful walking routes in Cornwall<br>
                 Upload your routes, photos and practical details so others can discover your favourite trails.
             </p>
-            <a href="{% url 'walk_list' %}" class="btn btn-primary btn-lg main-btn">
+            <a href="{% url 'walk_list' %}" class="btn btn-primary btn-lg main-btn" aria-label="Explore all walks">
                 Explore Walks
             </a>
              {% if user.is_authenticated %}
-                    <a href="{% url 'walk_create' %}" class="btn btn-outline-secondary scnd-btn">Add Walk</a>
+                    <a href="{% url 'walk_create' %}" class="btn btn-outline-secondary scnd-btn" aria-label="Add a new walk">Add Walk</a>
                     {% endif %}
         </div>
         
@@ -32,7 +32,7 @@
                 <div class="col-12 col-md-3">
                     <div class="card shadow-sm">
                         <div class="card-body text-center">
-                            <h2 class="display-2">{{ walk_count }}</h2>
+                            <h2 class="display-2" aria-label="Total number of walks">{{ walk_count }}</h2>
                             <p class="card-text text-muted">Walks</p>
                         </div>
                     </div>
@@ -40,7 +40,7 @@
                 <div class="col-12 col-md-3">
                     <div class="card shadow-sm">
                         <div class="card-body text-center">
-                            <h2 class="display-2">{{ total_distance|floatformat:1 }}</h2>
+                            <h2 class="display-2" aria-label="Total distance covered in kilometers">{{ total_distance|floatformat:1 }}</h2>
                             <p class="card-text text-muted">Total Distance (km)</p>
                         </div>
                     </div>
@@ -52,8 +52,8 @@
          
         <div class="container">
             <h2>Map of walks</h2>
-            <div id="walk-map"></div>
-            <script type="application/json" id="walk-markers-data">{{ walk_markers|safe }}</script>
+            <div id="walk-map" aria-label="Interactive map showing all walk locations in Cornwall"></div>
+            <script type="application/json" id="walk-markers-data" aria-hidden="true">{{ walk_markers|safe }}</script>
         </div>
 
 
@@ -95,17 +95,17 @@
                                     <li><span class="fw-semibold">Duration:</span> {{ walk.time_hours }}h {{ walk.time_minutes }}m</li>
                                 </ul>
                                 <p class="card-text">{{ walk.description|capfirst|striptags|truncatewords_html:20 }}</p>
-                                <a class="btn btn-primary mt-auto main-btn" href="{% url 'walk_detail' walk.slug %}">View details</a>
+                                <a class="btn btn-primary mt-auto main-btn" href="{% url 'walk_detail' walk.slug %}" aria-label="View details for {{ walk.title }} walk in {{ walk.location }}">View details</a>
                             </div>
                         </div>
                         </div>
                     {% endfor %}
                 </div>
             {% else %}
-                <p class="text-muted">No featured walks yet.</p>
+                <p class="text-muted" role="status" aria-live="polite">No featured walks yet.</p>
             {% endif %}
             <div class="text-center mt-4">
-            <a class="btn btn-outline-secondary text-center featured-btn scnd-btn" href="{% url 'walk_list' %}">See all walks</a>
+            <a class="btn btn-outline-secondary text-center featured-btn scnd-btn" href="{% url 'walk_list' %}" aria-label="View all walks">See all walks</a>
             </div>
         </div>
             

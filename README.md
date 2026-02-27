@@ -159,7 +159,9 @@ Asking what a specific line or block of code does.
 
 - code generation. 
 
-Asking for a step by step way of implementing a feature
+Asking for a step by step way of implementing a feature.
+
+Asked ai to suggest aria labels i might have missed.
 
 - Debugging 
 

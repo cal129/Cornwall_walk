@@ -7,9 +7,9 @@
     <div class="container py-3">
         <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-md-between gap-3 mb-4">
             <h1 class="mb-0">All Walks</h1>
-            <form method="get" class="d-flex align-items-center gap-2 walk-sort">
+            <form method="get" class="d-flex align-items-center gap-2 walk-sort" aria-label="Sort walks">
                 <label for="sort" class="small text-muted">Order by</label>
-                <select id="sort" name="sort" class="form-select walk-sort__select" onchange="this.form.submit()">
+                <select id="sort" name="sort" class="form-select walk-sort__select" aria-label="Sort walks by" onchange="this.form.submit()">
                     <option value="newest" {% if sort == 'newest' %}selected{% endif %}>Newest</option>
                     <option value="oldest" {% if sort == 'oldest' %}selected{% endif %}>Oldest</option>
                     <option value="distance_asc" {% if sort == 'distance_asc' %}selected{% endif %}>Distance (shortest)</option>
@@ -46,7 +46,7 @@
                                     <li><span class="fw-semibold">Duration:</span> {{ walk.time_hours }}h {{ walk.time_minutes }}m</li>
                                 </ul>
                                 <p class="card-text">{{ walk.description|capfirst|striptags|truncatewords_html:20 }}</p>
-                                <a class="btn btn-primary mt-auto main-btn" href="{% url 'walk_detail' walk.slug %}">View details</a>
+                                <a class="btn btn-primary mt-auto main-btn" href="{% url 'walk_detail' walk.slug %}" aria-label="View details for {{ walk.title }} walk in {{ walk.location }}">View details</a>
                             </div>
                         </div>
                     </div>
@@ -64,17 +64,17 @@
                         <!-- Previous Page -->
                         {% if walks.has_previous %}
                             <li class="page-item">
-                                <a class="page-link" href="?page=1&sort={{ sort }}">First</a>
+                                <a class="page-link" href="?page=1&sort={{ sort }}" aria-label="Go to first page">First</a>
                             </li>
                             <li class="page-item">
-                                <a class="page-link" href="?page={{ walks.previous_page_number }}&sort={{ sort }}">Previous</a>
+                                <a class="page-link" href="?page={{ walks.previous_page_number }}&sort={{ sort }}" aria-label="Go to previous page">Previous</a>
                             </li>
                         {% else %}
                             <li class="page-item disabled">
-                                <span class="page-link">First</span>
+                                <span class="page-link" aria-disabled="true">First</span>
                             </li>
                             <li class="page-item disabled">
-                                <span class="page-link">Previous</span>
+                                <span class="page-link" aria-disabled="true">Previous</span>
                             </li>
                         {% endif %}
 
@@ -82,11 +82,11 @@
                         {% for num in walks.paginator.page_range %}
                             {% if walks.number == num %}
                                 <li class="page-item active">
-                                    <span class="page-link">{{ num }}</span>
+                                    <span class="page-link" aria-current="page">{{ num }}</span>
                                 </li>
                             {% else %}
                                 <li class="page-item">
-                                    <a class="page-link" href="?page={{ num }}&sort={{ sort }}">{{ num }}</a>
+                                    <a class="page-link" href="?page={{ num }}&sort={{ sort }}" aria-label="Go to page {{ num }}">{{ num }}</a>
                                 </li>
                             {% endif %}
                         {% endfor %}
@@ -94,17 +94,17 @@
                         <!-- Next Page -->
                         {% if walks.has_next %}
                             <li class="page-item">
-                                <a class="page-link" href="?page={{ walks.next_page_number }}&sort={{ sort }}">Next</a>
+                                <a class="page-link" href="?page={{ walks.next_page_number }}&sort={{ sort }}" aria-label="Go to next page">Next</a>
                             </li>
                             <li class="page-item">
-                                <a class="page-link" href="?page={{ walks.paginator.num_pages }}&sort={{ sort }}">Last</a>
+                                <a class="page-link" href="?page={{ walks.paginator.num_pages }}&sort={{ sort }}" aria-label="Go to last page">Last</a>
                             </li>
                         {% else %}
                             <li class="page-item disabled">
-                                <span class="page-link">Next</span>
+                                <span class="page-link" aria-disabled="true">Next</span>
                             </li>
                             <li class="page-item disabled">
-                                <span class="page-link">Last</span>
+                                <span class="page-link" aria-disabled="true">Last</span>
                             </li>
                         {% endif %}
                     </ul>
@@ -112,7 +112,7 @@
                 </div>
             {% endif %}
         {% else %}
-            <p>No walks found.</p>
+            <p role="status" aria-live="polite">No walks found.</p>
         {% endif %}
     </div>
 {% endblock %}

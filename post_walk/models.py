@@ -45,6 +45,9 @@ class postwalk(models.Model):
         User, related_name="favourite_walks", blank=True
     )
 
+    def __str__(self):
+        return self.title
+
 
 class Comment(models.Model):
     walk = models.ForeignKey(
