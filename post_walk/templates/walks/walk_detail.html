@@ -90,7 +90,7 @@
                 <div class="card shadow-sm mt-4">
                     <div class="card-body">
                         <h2 class="h5 mb-3">Current Weather</h2>
-                        <div id="weather-widget" data-coordinates="{{ walk.coordinates }}" aria-label="Current weather information for {{ walk.location }}" aria-live="polite">
+                        <div id="weather-widget" data-coordinates="{{ walk.coordinates }}" >
                             <div class="text-center">
                                 <div class="spinner-border text-primary" role="status" aria-label="Loading weather data">
                                     <span class="visually-hidden">Loading weather...</span>
@@ -106,7 +106,7 @@
         <div class="card shadow-sm mt-4">
             <div class="card-body">
                 <h2 class="h5 mb-3">Map</h2>
-                <div id="walk-map" data-coordinates="{{ walk.coordinates }}" aria-label="Interactive map showing the route for {{ walk.title }} walk at {{ walk.location }}"></div>
+                <div id="walk-map" data-coordinates="{{ walk.coordinates }}"></div>
             </div>
         </div>
 
@@ -162,7 +162,7 @@
                 
                 <!-- Hidden edit form -->
                 <div class="comment-edit-form-{{ comment.id }}" style="display: none;" aria-live="assertive" role="region" aria-label="Edit comment form">
-                    <form method="POST" action="{% url 'comment_edit' comment.id }}">
+                    <form method="POST" action="{% url 'comment_edit' comment.id %}">
                         {% csrf_token %}
                         <textarea name="content" class="form-control mb-2" rows="3" style="border-radius: 20px; border: 1.5px solid #010101;" aria-label="Edit comment text">{{ comment.content }}</textarea>
                         <div class="d-flex gap-2">
