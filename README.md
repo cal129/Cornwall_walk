@@ -1,6 +1,6 @@
 # Sand & Trails
 
-## a community platform where hikers can discover, share, and discuss the most beautiful walking routes across Cornwall.
+## A community platform where hikers can discover, share, and discuss the most beautiful walking routes across Cornwall.
 
 Sand & Trails is a community platform dedicated to discovering and sharing the most beautiful walking routes across Cornwall. Whether you're a seasoned hiker or exploring new trails, the platform allows users to browse existing walks complete with detailed information, photos, and practical details. Users can also contribute their own favorite routes to help others discover hidden gems across the Cornish coastline and countryside. The community aspect is strengthened through an integrated commenting system, enabling hikers to share experiences, tips, and recommendations with fellow trail enthusiasts.
 
@@ -15,30 +15,20 @@ Sand & Trails is a community platform dedicated to discovering and sharing the m
 - Users can favourite walks.
 - Users can comment on all walks.
 - Admin can aprove walks and comments.
+- Users can order all walks by length, time, name, date.
 
+<img src="post_walk/static/post_walk/images/readme/Screenshot 2026-02-27 at 12.56.04 pm.png" width="800px"/>
+<img src="post_walk/static/post_walk/images/readme/Screenshot 2026-02-27 at 12.56.19 pm.png" width="800px"/>
+<img src="post_walk/static/post_walk/images/readme/Screenshot 2026-02-27 at 12.59.00 pm.png" width="800px"/>
+<img src="post_walk/static/post_walk/images/readme/Screenshot 2026-02-27 at 12.59.16 pm.png" width="800px"/>
 
 ### Deployment
 
 Live site: https://cornish-walks-34ed89614ebb.herokuapp.com/
 
-### Heroku
-1 Create Heroku app
-
-2 Set Environment Variables in Heroku Config Vars
-
-- SECRET_KEY
-- DATABASE_URL
-- CLOUDINARY_URL
-
-3 Deploy from GitHub
-
-
 
 
 ### Local setup VS code:
-
-
-
 
 Local Setup:
 
@@ -58,12 +48,40 @@ CLOUDINARY_URL
 Migrate:
 python manage.py migrate
 
+Create Procfile: 
+web: gunicorn run_wild.wsgi
+
 Create superuser:
 python manage.py createsuperuser
 
 Run:
 python manage.py runserver
 
+### Heroku
+1 Create Heroku app
+
+2 Set Environment Variables in Heroku Config Vars
+
+- SECRET_KEY
+- DATABASE_URL
+- CLOUDINARY_URL
+
+
+
+3 Remove DISABLE_COLLECTSTATIC from Heroku config vars if it is set
+
+4 Run collectstatic - python3 manage.py collectstatic
+
+5 Deploy from GitHub
+
+
+### Security Notes
+
+- Verify DEBUG is False in production
+- Keep env.py in .gitignore
+- Ensure sensitive data is not in version control
+- Use strong, unique secret key
+- Never commit sensitive information
 
 ## Design
 
@@ -162,10 +180,10 @@ Acceptance Criteria:
 
 ---
 
-I used the agile method of "Backlog, To do, In progress and Done" to keep track of user stories and features.
+### I used the agile method of "Backlog, To do, In progress and Done" to keep track of user stories and features.
 <img src="post_walk/static/post_walk/images/readme/Kanban.png" width="800px"/>
 
-
+https://github.com/users/cal129/projects/5
 
 
 ### Wire Frames
@@ -189,16 +207,24 @@ I created 5 automated tests to test my form and and views.
 
 <img src="post_walk/static/post_walk/images/readme/automated_test.png" width="400px"/>
 
-I then Manually validated the HTML, CSS, Javasript, Python and lighthouse testing.
+I then Manually validated the HTML, CSS, Python and did lighthouse testing.
+
 The best practices score is mostly affected by cloudinary.
+
 Walk_form.html validation errors are to do with summernote.
-the python errors, are to do with line too long.
+
+The python errors, are to do with line too long.
+
+User story 5 is noot part of the MVP and will be implemented in a later version.
+
 
 
 <img src="post_walk/static/post_walk/images/readme/testing.png" width="600px"/>
 
 
+<img src="post_walk/static/post_walk/images/readme/Screenshot 2026-02-27 at 1.10.33 pm.png" width="600px"/>
 
+<img src="post_walk/static/post_walk/images/readme/Screenshot 2026-02-27 at 1.11.17 pm.png" width="600px"/>
 
 
 **Web Accessibility** evaluation tool returned no errors or alerts
@@ -232,6 +258,8 @@ Asked ai to suggest aria labels i might have missed.
 Pasting in errors to find a suggested solution.
 
 
+### The first week of the project I limited ai to just helping with fixing errors and bugs in the code along with the pre project planning. I did this so I could fully understand the code and the organisation. Later in the project I used it to help with coding and implementing features.I found it often wanted to add css styling within the html file.
+
 ## Future development
 
 In the next versiion of sand & trails website i would like to add the following features.
@@ -247,6 +275,12 @@ In the next versiion of sand & trails website i would like to add the following 
 interactive Map  https://leafletjs.com - using coordinates to add a pin.
 
 weather api  https://openweathermap.org/api - using coordinates to find local weather.
+
+Google Fonts (web fonts) — https://fonts.google.com
+
+Django Summernote (rich text editor) — https://github.com/summernote/django-summernote
+
+Django Allauth (authentication) — https://github.com/pennersr/django-allauth
 
 Django documentation.
 
