@@ -18,11 +18,12 @@ Live site: https://cornish-walks-34ed89614ebb.herokuapp.com/
 
 ## Design
 
-Sand & Trails is a user friendly, mobile first, responsive website using HTML5, CSS3, Bootstrap 5, JavaScript and Python.
+Sand & Trails is a user friendly, mobile first, responsive website using HTML5, CSS3, Bootstrap 5, JavaScript and Python. 
 
 ### Color palette
 
 A nature inspired color palette.
+
 <img src="post_walk/static/post_walk/images/readme/colors.png" width="800px">
 
 ### User Features:
@@ -39,6 +40,12 @@ A nature inspired color palette.
 
 I have configured a secure Django web framework with a connected PostgreSQL database and custom models for the application. I used the ERD bellow to plan the structure for my database models.
 
+Primary key (comment id) and edit date missing from the comments model in the ERD.
+
+a Favourites line missing from postwalk in the ERD.
+
+The save walk model isnt implemented yet.
+
 <img src="post_walk/static/post_walk/images/readme/ERD.png" width="800px"/>
 
 ### CRUD functionality
@@ -47,10 +54,12 @@ Full CRUD functionality is implemented and tested with logged-in users able to:
 Create:
 - Use a form to post a walk
 - add comments to a walk item
+- a user can add a walk to their favourites
 
 Read
 - can read their own un-authorsed comments
 - view all walks
+- a user can view their own favourited walks
 
 Update
 - edit their comment
@@ -131,7 +140,13 @@ I created 5 automated tests to test my form and and views.
 
 <img src="post_walk/static/post_walk/images/readme/automated_test.png" width="400px"/>
 
-I then Manually validated the HTML, CSS, Javasript and Python.
+I then Manually validated the HTML, CSS, Javasript, Python and lighthouse testing.
+The best practices score is mostly affected by cloudinary.
+Walk_form.html validation errors are to do with summernote.
+the python errors, are to do with line too long.
+
+
+<img src="post_walk/static/post_walk/images/readme/testing.png" width="600px"/>
 
 
 
