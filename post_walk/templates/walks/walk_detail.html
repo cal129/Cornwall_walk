@@ -23,11 +23,25 @@
                     {% else %}
                         <img class="card-img-top" src="{% static 'post_walk/images/default-walk.jpg' %}" alt="Default walk image">
                     {% endif %}
-                    <div class="card-body">
+                     <div class="card-body">
                         <h1 class="card-title h3 mb-3">{{ walk.title }}</h1>
-                        <div class="d-flex flex-wrap gap-2 mb-3">
-                            <span class="badge-circle">{{ walk.get_difficulty_display }}</span>
-                            <span class="badge-circle">{{ walk.get_type_display }}</span>
+                        <div class="d-flex flex-wrap gap-2 mb-3 justify-content-between align-items-center">
+                            <div class="d-flex flex-wrap gap-2">
+                                <span class="badge-circle">{{ walk.get_difficulty_display }}</span>
+                                <span class="badge-circle">{{ walk.get_type_display }}</span>
+                            </div>
+                            <form method="POST" action="{% url 'toggle_favourite' walk.slug %}">
+                                {% csrf_token %}
+                                {% if user.is_authenticated %}
+                                    {% if walk in user.favourite_walks.all %}
+                                        <button type="submit" class="fav-btn fav-btn-active">❤️</button>
+                                    {% else %}
+                                        <button type="submit" class="fav-btn">🤍</button>
+                                    {% endif %}
+                                {% else %}
+                                    <a href="{% url 'account_login' %}" class="fav-btn">🤍</a>
+                                {% endif %}
+                            </form>
                         </div>
                         <h2 class="h5">Description</h2>
                         <div class="card-text">{{ walk.description|safe }}</div>

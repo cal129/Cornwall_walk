@@ -20,9 +20,9 @@ Live site: https://cornish-walks-34ed89614ebb.herokuapp.com/
 
 Sand & Trails is a user friendly, mobile first, responsive website using HTML5, CSS3, Bootstrap 5, JavaScript and Python.
 
-### Color pallete
+### Color palette
 
-A nature inspired color pallete.
+A nature inspired color palette.
 <img src="post_walk/static/post_walk/images/readme/colors.png" width="800px">
 
 ### User Features:
@@ -37,7 +37,7 @@ A nature inspired color pallete.
 
 ### Database
 
-I have configured a secure Django web framework with a connected PostgreSQL database and custom models for the application. I used the ERD bellow to plan the structure for my databse models.
+I have configured a secure Django web framework with a connected PostgreSQL database and custom models for the application. I used the ERD bellow to plan the structure for my database models.
 
 <img src="post_walk/static/post_walk/images/readme/ERD.png" width="800px"/>
 
@@ -127,18 +127,29 @@ I have added clear notification messages that inform users of data changes and c
 
 ## Testing
 
+I created 5 automated tests to test my form and and views.
+
+<img src="post_walk/static/post_walk/images/readme/automated_test.png" width="400px"/>
+
+I then Manually validated the HTML, CSS, Javasript and Python.
 
 
+
+
+
+**Web Accessibility** evaluation tool returned no errors or alerts
+
+<img src="post_walk/static/post_walk/images/readme/wavetest.png" width="400px"/>
 
 
 
 ## Use of AI
 
-In this project, I used AI is a few ways to help my build the website.
+In this project, I used AI in a few ways to help my build the website.
 
 - Design
 
-Using co-pilot to design the logo and fav icon. 
+Using co-pilot to design the logo and favicon. 
 
 help with creating user stories.
 

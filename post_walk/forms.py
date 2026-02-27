@@ -34,5 +34,5 @@ class WalkForm(forms.ModelForm):
             'difficulty': forms.Select(attrs={'class': 'form-select'}),
             'type': forms.Select(attrs={'class': 'form-select'}),
             'photo': forms.FileInput(attrs={'class': 'form-control'}),
-           'coordinates': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Coordinates', 'value': '50.4155° N, 5.0737° W'}),
+            'coordinates': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Coordinates', 'value': '50.4155° N, 5.0737° W'}),
         }

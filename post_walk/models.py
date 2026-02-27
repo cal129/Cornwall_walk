@@ -37,6 +37,7 @@ class postwalk(models.Model):
     date_added = models.DateTimeField(auto_now_add=True)
     authorised = models.BooleanField(default=False)
     featured = models.BooleanField(default=False)
+    favourites = models.ManyToManyField(User, related_name='favourite_walks', blank=True)
 
 
 class Comment(models.Model):

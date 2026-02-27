@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}My Favourite Walks - Sand & Trails{% endblock %}
+
+{% block content %}
+    <div class="container py-3">
+        <h1 class="mb-4">My Favourite Walks</h1>
+        <p class="lead mb-4">Hello {{ user.username|capfirst }}, here are your favourite walks to explore again!</p>
+
+        {% if walks %}
+            <div class="row g-4">
+                {% for walk in walks %}
+                <div class="col-12 col-md-4">
+                    <div class="card h-100 position-relative">
+                        {% if walk.photo and walk.photo.public_id != 'placeholder' %}
+                            <img class="card-img-top" src="{{ walk.photo.url }}" alt="{{ walk.title }}">
+                        {% else %}
+                            <img class="card-img-top" src="{% static 'post_walk/images/default-walk.jpg' %}" alt="Default walk image">
+                        {% endif %}
+                        <div class="card-overlay">
+                            <h2 class="card-title h5">{{ walk.title|capfirst }}</h2>
+                            <p class="card-location">{{ walk.location|capfirst }}</p>
+                        </div>
+                        <div class="card-body d-flex flex-column">
+                            <div class="d-flex flex-wrap gap-2 mb-2">
+                                <span class="badge-circle">{{ walk.get_difficulty_display }}</span>
+                                <span class="badge-circle">{{ walk.get_type_display }}</span>
+                            </div>
+                            <ul class="list-unstyled small text-muted mb-3">
+                                <li><span class="fw-semibold">Location:</span> {{ walk.location|capfirst }}</li>
+                                <li><span class="fw-semibold">Distance:</span> {{ walk.distance }} km</li>
+                                <li><span class="fw-semibold">Duration:</span> {{ walk.time_hours }}h {{ walk.time_minutes }}m</li>
+                            </ul>
+                            <p class="card-text">{{ walk.description|capfirst|striptags|truncatewords_html:20 }}</p>
+                            <a class="btn btn-primary mt-auto main-btn" href="{% url 'walk_detail' walk.slug %}">View details</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="mt-4">You haven't favourited any walks yet. <a href="{% url 'walk_list' %}" class="auth-link">Browse walks</a></p>
+        {% endif %}
+    </div>
+{% endblock %}

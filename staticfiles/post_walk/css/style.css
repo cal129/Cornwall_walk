@@ -457,7 +457,33 @@ main {
     text-decoration: underline;
 }
 
+/* Favorite button styling */
+.fav-btn {
+    font-family: 'jakarta', sans-serif;
+    padding: 12px 24px;
+    font-size: 16px;
+    border-radius: 40px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    background-color: transparent;
+    border: 1.5px solid #010101;
+    color: #010101;
+    cursor: pointer;
+}
 
+.fav-btn:hover {
+    background-color: #f1e4b0;
+    transform: translateY(-2px);
+}
+
+.fav-btn-active {
+    background-color: #559ac5;
+    color: white;
+    border-color: #559ac5;
+}
+
+.fav-btn-active:hover {
+    background-color: #4589b4;
+}
 
 
 /* Ensure footer is pushed to the bottom in the column flex layout */

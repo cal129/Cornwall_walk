@@ -51,10 +51,13 @@ def walk_list(request):
 
 # Show one walk's details
 def walk_detail(request, slug):
-    walk = postwalk.objects.get(slug=slug)  # Get walk by slug
-    comments = walk.comments.filter(approved=True)  # Get all approved comments
+    walk = postwalk.objects.get(slug=slug)
+    comments = walk.comments.filter(approved=True)
 
     if request.method == 'POST':
+        if not request.user.is_authenticated:
+            return redirect('account_login')
+        
         comment_form = CommentForm(request.POST)
         if comment_form.is_valid():
             comment = comment_form.save(commit=False)
@@ -153,3 +156,24 @@ def comment_edit(request, comment_id):
             return redirect('walk_detail', slug=comment.walk.slug)
 
     return redirect('walk_detail', slug=comment.walk.slug)
+
+# View to display user's favourite walks
+@login_required
+def favourite_walks(request):
+    """View to display user's favourite walks"""
+    walks = request.user.favourite_walks.filter(authorised=True).order_by('-date_added')
+    return render(request, 'walks/favourite_walks.html', {'walks': walks})
+
+@login_required
+def toggle_favourite(request, slug):
+    """Toggle a walk as favourite"""
+    walk = get_object_or_404(postwalk, slug=slug)
+    
+    if walk in request.user.favourite_walks.all():
+        request.user.favourite_walks.remove(walk)
+        messages.success(request, f'Removed {walk.title} from favourites.')
+    else:
+        request.user.favourite_walks.add(walk)
+        messages.success(request, f'Added {walk.title} to favourites!')
+    
+    return redirect('walk_detail', slug=slug)
