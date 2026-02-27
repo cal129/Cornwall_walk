@@ -21,7 +21,7 @@ Sand & Trails is a community platform dedicated to discovering and sharing the m
 
 Live site: https://cornish-walks-34ed89614ebb.herokuapp.com/
 
-## Heroku
+### Heroku
 1 Create Heroku app
 
 2 Set Environment Variables in Heroku Config Vars
@@ -52,7 +52,7 @@ pip install -r requirements.txt
 
 Create env.py with:
 SECRET_KEY
-DATABASE_URL (optional if using sqlite locally)
+DATABASE_URL 
 CLOUDINARY_URL
 
 Migrate:
