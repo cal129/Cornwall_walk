@@ -7,13 +7,62 @@ Sand & Trails is a community platform dedicated to discovering and sharing the m
 
 <img src="post_walk/static/post_walk/images/readme/overview.png" width="800px"/>
 
+### features
+
+- User uploadable walks from around Cornwall.
+- Homepage has a box counting the amount of walks uploaded and total KM.
+- interactive map to see where the walks are located.
+- Users can favourite walks.
+- Users can comment on all walks.
+- Admin can aprove walks and comments.
 
 
-## Deployment
+### Deployment
 
 Live site: https://cornish-walks-34ed89614ebb.herokuapp.com/
 
+## Heroku
+1 Create Heroku app
 
+2 Set Environment Variables in Heroku Config Vars
+
+- SECRET_KEY
+- DATABASE_URL
+- CLOUDINARY_URL
+
+3 Deploy from GitHub
+
+
+
+
+### Local setup VS code:
+
+
+
+
+Local Setup:
+
+Clone the repo.
+
+Create and activate venv:
+python -m venv .venv .venv\Scripts\activate
+
+Install:
+pip install -r requirements.txt
+
+Create env.py with:
+SECRET_KEY
+DATABASE_URL (optional if using sqlite locally)
+CLOUDINARY_URL
+
+Migrate:
+python manage.py migrate
+
+Create superuser:
+python manage.py createsuperuser
+
+Run:
+python manage.py runserver
 
 
 ## Design
@@ -180,6 +229,35 @@ Asked ai to suggest aria labels i might have missed.
 
 - Debugging 
 
-Pasting in errors to find a suggested solution
+Pasting in errors to find a suggested solution.
 
 
+## Future development
+
+In the next versiion of sand & trails website i would like to add the following features.
+- users can add their own private comments to the walks
+- add a date of when they did it
+- add a overall rating system
+- add a search function eg by area
+- tags or key words search or ordering
+
+
+## credits
+
+interactive Map  https://leafletjs.com - using coordinates to add a pin.
+
+weather api  https://openweathermap.org/api - using coordinates to find local weather.
+
+Django documentation.
+
+Bootstrap documentation.
+
+Cloudinary documentation.
+
+Heroku deployment documentation.
+
+Lucidchart for ERD design tools.
+
+Balsamiq for wireframes.
+
+Code Institute Instructors & Support
