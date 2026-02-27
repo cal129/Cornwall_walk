@@ -37,7 +37,7 @@ class TestWalkViews(TestCase):
         self.assertIn(b"Walk description", response.content)
         self.assertIsInstance(
             response.context['comment_form'], CommentForm)
-   
+
         self.assertIsInstance(
             response.context['comment_form'], CommentForm)
 

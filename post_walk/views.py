@@ -57,7 +57,7 @@ def walk_detail(request, slug):
     if request.method == 'POST':
         if not request.user.is_authenticated:
             return redirect('account_login')
-        
+
         comment_form = CommentForm(request.POST)
         if comment_form.is_valid():
             comment = comment_form.save(commit=False)
@@ -81,7 +81,7 @@ def index(request):
     featured_walks = postwalk.objects.filter(featured=True, authorised=True).order_by('-date_added')[:3]
     walk_count = postwalk.objects.filter(authorised=True).count()  # Counts only approved walks
     total_distance = postwalk.objects.filter(authorised=True).aggregate(Sum('distance'))['distance__sum'] or 0  # Sums only approved walks
-    
+
     # Gather all authorised walks with coordinates for the map
     all_walks = postwalk.objects.filter(authorised=True)
     walk_markers = []
@@ -95,7 +95,7 @@ def index(request):
                 'slug': walk.slug,
                 'location': walk.location
             })
-    
+
     return render(request, 'index.html', {
         'featured_walks': featured_walks,
         'walk_count': walk_count,
@@ -118,6 +118,7 @@ def delete_comment(request, comment_id):
         messages.error(request, 'You can only delete your own comments.')
         return redirect('walk_detail', slug=comment.walk.slug)
 
+
 # Post a walk - only if logged in.
 @login_required
 def walk_create(request):
@@ -133,6 +134,7 @@ def walk_create(request):
     else:
         form = WalkForm()
     return render(request, 'walks/walk_form.html', {'form': form})
+
 
 # Edit a comment - only if logged in and owns the comment.
 @login_required
@@ -157,6 +159,7 @@ def comment_edit(request, comment_id):
 
     return redirect('walk_detail', slug=comment.walk.slug)
 
+
 # View to display user's favourite walks
 @login_required
 def favourite_walks(request):
@@ -164,16 +167,17 @@ def favourite_walks(request):
     walks = request.user.favourite_walks.filter(authorised=True).order_by('-date_added')
     return render(request, 'walks/favourite_walks.html', {'walks': walks})
 
+
 @login_required
 def toggle_favourite(request, slug):
     """Toggle a walk as favourite"""
     walk = get_object_or_404(postwalk, slug=slug)
-    
+
     if walk in request.user.favourite_walks.all():
         request.user.favourite_walks.remove(walk)
         messages.success(request, f'Removed {walk.title} from favourites.')
     else:
         request.user.favourite_walks.add(walk)
         messages.success(request, f'Added {walk.title} to favourites!')
-    
+
     return redirect('walk_detail', slug=slug)
